@@ -8,7 +8,6 @@
 import Foundation
 
 /// The set of ways to define movement in some direction.
-/// 
 public enum Movement: Equatable {
     case to(Room)
     case blocked(String)

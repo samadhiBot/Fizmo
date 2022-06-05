@@ -1,5 +1,5 @@
 //
-//  Attribute.swift
+//  Flag.swift
 //  Fizmo
 //
 //  Created by Chris Sessions on 3/19/22.
@@ -7,9 +7,7 @@
 
 import Foundation
 
-/// An `Attribute` specifies a special characteristic of an ``Object`` or ``Room``.
-///
-/// `Fizmo` Attributes correspond to Zil Flags.
+/// A `Flag` specifies a special attribute of an ``Object``.
 ///
 /// Detailed attribute descriptions are taken from
 /// [Learning ZIL](https://archive.org/details/Learning_ZIL_Steven_Eric_Meretzky_1995/page/n60/mode/1up)
@@ -17,19 +15,58 @@ import Foundation
 /// [ZIL Course](https://github.com/ZoBoRf/ZILCourse/blob/master/ZILCourse.pdf)
 /// by Marc Blank (1982).
 ///
-public enum Attribute: Equatable {
+public struct Flag: Equatable {
+    /// The flag's unique identifier.
+    public let id: Flag.Identifier
+
+    /// The flag's original Zil value.
+    let zil: String
+}
+
+// MARK: - Flag.Identifier
+
+extension Flag {
+    /// A unique flag identifier.
+    public struct Identifier: Hashable {
+        let rawValue: String
+    }
+}
+
+extension Flag.Identifier: Comparable {
+    public static func < (lhs: Flag.Identifier, rhs: Flag.Identifier) -> Bool {
+        lhs.rawValue < rhs.rawValue
+    }
+}
+
+extension Flag.Identifier: CustomStringConvertible {
+    public var description: String {
+        return rawValue
+    }
+}
+
+extension Flag.Identifier: ExpressibleByStringLiteral {
+    public typealias StringLiteralType = String
+
+    public init(stringLiteral value: String) {
+        rawValue = value
+    }
+}
+
+// MARK: - Predefined flags
+
+extension Flag {
     /// The object's description begins with a vowel.
     ///
     /// "The object's DESC begins with a vowel; any verb default which prints an indefinite article
     /// before the DESC is warned to use 'an' instead of 'a'."
-    case beginsWithVowel
+    public static let beginsWithVowel = Flag(id: "beginsWithVowel", zil: "VOWELBIT")
 
     /// The vehicle object should catch dropped items.
     ///
     /// "Found in vehicles, this not-very-important flag means that if the player drops something
     /// while in that vehicle, the object should stay in the vehicle rather than falling to the
     /// floor of the room itself."
-    case catchesDroppedItems
+    public static let catchesDroppedItems = Flag(id: "catchesDroppedItems", zil: "DROPBIT")
 
     /// The object has been touched, or the room has been visited.
     ///
@@ -38,84 +75,97 @@ public enum Attribute: Equatable {
     /// the player has not been in any room yet. In the case of an object, this means that the
     /// object has been taken or otherwise disturbed by the player; for example, once the TOUCHBIT
     /// of an object is set, if it has an FDESC, that FDESC will no longer be used to describe it."
-    case hasBeenTouched
-
-    /// Tells routines to say "in" instead of "on".
-    ///
-    /// "Another not-too-important vehicle-related flag, it tells various routines to say 'in the
-    /// vehicle' rather than 'on the vehicle.'"
-    case inNotOn
+    public static let hasBeenTouched = Flag(id: "hasBeenTouched", zil: "TOUCHBIT")
 
     /// The object is an actor.
-    case isActor
+    public static let isActor = Flag(id: "isActor", zil: "ACTORBIT")
 
     /// The object can be attacked.
-    case isAttackable
+    public static let isAttackable = Flag(id: "isAttackable", zil: "ATTACKBIT")
+
+    /// The object is a being worn.
+    ///
+    /// "This means that a wearable object is currently being worn."
+    public static let isBeingWorn = Flag(id: "isBeingWorn", zil: "WORNBIT")
 
     /// The object is a body part.
     ///
     /// "The object is a body part: the PIANDS object, for example."
-    case isBodyPart
+    public static let isBodyPart = Flag(id: "isBodyPart", zil: "PARTBIT")
 
     /// The object can be burned.
     ///
     /// The object is burnable. Generally, most takeable objects which are made out of wood or paper
     /// should have the BURNBIT."
-    case isBurnable
+    public static let isBurnable = Flag(id: "isBurnable", zil: "BURNBIT")
 
     /// The object can be climbed.
-    case isClimbable
+    public static let isClimbable = Flag(id: "isClimbable", zil: "CLIMBBIT")
 
     /// The object is a container.
     ///
     /// "The object is a container; things can be put inside it, it can be opened and closed, etc."
-    case isContainer
+    public static let isContainer = Flag(id: "isContainer", zil: "CONTBIT")
+
+    /// The room has been destroyed.
+    ///
+    /// "One interesting note about ROOMs: they can be destroyed arbitrarily within the context of a
+    /// game. This is done by setting the RMUNGBIT of the ROOM and changing the LDESC of the ROOM to
+    /// be something appropriate to print whenever the ACTOR attempts to enter the ROOM. The WALK
+    /// action checks for the RMUNGBIT and prints the appropriate message."
+    public static let isDestroyed = Flag(id: "isDestroyed", zil: "RMUNGBIT")
 
     /// The object is a device.
-    case isDevice
+    public static let isDevice = Flag(id: "isDevice", zil: "DEVICEBIT")
 
     /// The object is a door.
     ///
     /// "The object is a door and various routines, such as V-OPEN, should treat it as such."
-    case isDoor
+    public static let isDoor = Flag(id: "isDoor", zil: "DOORBIT")
 
     /// The object is drinkable.
-    case isDrinkable
+    public static let isDrinkable = Flag(id: "isDrinkable", zil: "DRINKBIT")
 
     /// The object is a rLand.
     ///
     /// "Usually used only for rooms, this bit lets any routine that cares know that the room is dry
     /// land (as most are)."
-    case isDryLand
+    public static let isDryLand = Flag(id: "isDryLand", zil: "RLANDBIT")
 
     /// The object is edible.
-    case isEdible
+    public static let isEdible = Flag(id: "isEdible", zil: "EDIBLEBIT")
 
     /// The object is female.
     ///
     /// "The object is an ACTOR who is a female. Informs various routines to say 'she' instead of
     /// 'he'."
-    case isFemale
+    public static let isFemale = Flag(id: "isFemale", zil: "FEMALEBIT")
 
     /// The object can be fought.
-    case isFightable
+    public static let isFightable = Flag(id: "isFightable", zil: "FIGHTBIT")
 
     /// The object is flammable.
     ///
     /// "This means that the object is a source of fire. An object with the FLAMEBIT should also
     /// have the ONBIT (since it is providing light) and the LIGHTBIT (since it can be
     /// extinguished)."
-    case isFlammable
+    public static let isFlammable = Flag(id: "isFlammable", zil: "FLAMEBIT")
 
     /// The object is food.
-    case isFood
+    public static let isFood = Flag(id: "isFood", zil: "FOODBIT")
+
+    /// Tells routines to say "in" instead of "on".
+    ///
+    /// "Another not-too-important vehicle-related flag, it tells various routines to say 'in the
+    /// vehicle' rather than 'on the vehicle.'"
+    public static let isInNotOn = Flag(id: "isInNotOn", zil: "INBIT")
 
     /// The object is an integral part of another object.
     ///
     /// "This means that the object is an integral part of some other object, and can't be
     /// independently taken or dropped. An example might be a dial or button on a (takeable) piece
     /// of equipment."
-    case isIntegral
+    public static let isIntegral = Flag(id: "isIntegral", zil: "INTEGRALBIT")
 
     /// The object is invisible.
     ///
@@ -124,78 +174,70 @@ public enum Attribute: Equatable {
     /// might clear the invisible bit on the BLOOD-STAIN object after the player examines the
     /// bludgeon. Until that point, referring to the blood stain would get a response like 'You
     /// can't see any blood stain right here.'"
-    case isInvisible
+    public static let isInvisible = Flag(id: "isInvisible", zil: "INVISIBLE")
 
     /// The object can be a source of light.
     ///
     /// "The object is capable of being turned on and off, like the old brass lantern from Zork.
     /// However, it doesn't mean that the object is actually on."
-    case isLight
+    public static let isLight = Flag(id: "isLight", zil: "LIGHTBIT")
 
     /// The object is locked.
     ///
     /// "Tells routines like V-OPEN that an object or door is locked and can't be opened without
     /// proper equipment."
-    case isLocked
+    public static let isLocked = Flag(id: "isLocked", zil: "LOCKEDBIT")
 
     /// The object is a maze.
-    case isMaze
+    public static let isMaze = Flag(id: "isMaze", zil: "MAZEBIT")
 
     /// The room is a mid-air location.
     ///
     /// "The room is in mid-air, for those games with some type of flying."
-    case isMidAirLocation
+    public static let isMidAirLocation = Flag(id: "isMidAirLocation", zil: "RAIRBIT")
 
     /// The object is a not land.
-    case isNotLand
+    public static let isNotLand = Flag(id: "isNotLand", zil: "NONLANDBIT")
 
     /// The object is turned on.
     ///
     /// In the case of a room, this means that the room is lit. If your game takes place during the
     /// day, any outdoor room should have the ONBIT. In the case of an object, this means that the
     /// object is providing light. An object with the ONBIT should also have the LIGHTBIT."
-    case isOn
-
-    /// The object is openable.
-    case isOpenable
+    public static let isOn = Flag(id: "isOn", zil: "ONBIT")
 
     /// The object is open.
     ///
     /// "The object is a door or container, and is open."
-    case isOpen
+    public static let isOpen = Flag(id: "isOpen", zil: "OPENBIT")
+
+    /// The object is openable.
+    public static let isOpenable = Flag(id: "isOpenable", zil: "OPENABLEBIT")
 
     /// The room is an outside location.
     ///
     /// "Used in rooms to classify the room as an outdoors room."
-    case isOutside
+    public static let isOutside = Flag(id: "isOutside", zil: "OUTSIDEBIT")
 
     /// The object is a person.
     ///
     /// "This means that the object is a character in the game, and such act accordingly. For
     /// example, they can be spoken to. This flag is sometimes called the ACTORBIT."
-    case isPerson
+    public static let isPerson = Flag(id: "isPerson", zil: "PERSONBIT")
 
     /// The object's description is a plural noun or noun phrase.
     ///
     /// "The object's DESC is a plural noun or noun phrase, such as 'barking dogs,' and routines
     /// which use the DESC should act accordingly."
-    case isPlural
+    public static let isPlural = Flag(id: "isPlural", zil: "PLURALBIT")
 
     /// The object is readable.
     ///
     /// "The object is readable. Any object with a TEXT property should have the READBIT."
-    case isReadable
-
-    /// The room has been destroyed.
-    ///
-    /// "One interesting note about ROOMs: they can be destroyed arbitrarily within the context of a
-    /// game. This is done by setting the RMUNGBIT of the ROOM and changing the LDESC of the ROOM to
-    /// be something appropriate to print whenever the ACTOR attempts to enter the ROOM. The WALK
-    /// action checks for the RMUNGBIT and prints the appropriate message."
-    case isDestroyed
+    public static let isReadable = Flag(id: "isReadable", zil: "READBIT")
 
     /// The object is sacred.
-    case isSacred
+    public static let isSacred = Flag(id: "isSacred", zil: "SACREDBIT")
 
     /// The object is searchable.
     ///
@@ -209,58 +251,53 @@ public enum Attribute: Equatable {
     /// don't have the SEARCHBIT, the parser will say "You can't see any apple right here." Frankly,
     /// I think the SEARCHBIT is a stupid concept, and I automatically give the SEARCHBIT to all
     /// containers."
-    case isSearchable
+    public static let isSearchable = Flag(id: "isSearchable", zil: "SEARCHBIT")
 
     /// The object is staggered.
-    case isStaggered
+    public static let isStaggered = Flag(id: "isStaggered", zil: "STAGGERED")
 
     /// The object is a surface.
     ///
     /// "The object is a surface, such as a table, desk, countertop, etc. Any object with the
     /// SURFACEBIT should also have the CONTBIT (since you can put things on the surface) and the
     /// OPENBIT (since you can't close a countertop as you can a box)."
-    case isSurface
+    public static let isSurface = Flag(id: "isSurface", zil: "SURFACEBIT")
 
     /// The object can be taken.
-    case isTakable
+    public static let isTakable = Flag(id: "isTakable", zil: "TAKEBIT")
 
     /// The object is a tool.
-    case isTool
+    public static let isTool = Flag(id: "isTool", zil: "TOOLBIT")
 
     /// The object is transparent.
     ///
     /// "The object is transparent; objects inside it can be seen even if it is closed."
-    case isTransparent
+    public static let isTransparent = Flag(id: "isTransparent", zil: "TRANSBIT")
 
     /// The object is turnable.
-    case isTurnable
+    public static let isTurnable = Flag(id: "isTurnable", zil: "TURNBIT")
 
     /// The object is a vehicle.
     ///
     /// "This means that the object is a vehicle, and can be entered or boarded by the player. All
     /// objects with the VEHBIT should usually have the CONTBIT and the OPENBIT."
-    case isVehicle
+    public static let isVehicle = Flag(id: "isVehicle", zil: "VEHBIT")
 
     /// The room is a water location.
     ///
     /// "The room is water rather than dry land, such as the River and Reservoir in Zork I. Some
     /// typical implications: The player can't go there without a boat; anyone dropped outside of
     /// the boat will sink and be lost, etc."
-    case isWaterLocation
+    public static let isWaterLocation = Flag(id: "isWaterLocation", zil: "RWATERBIT")
 
     /// The object is a weapon.
-    case isWeapon
+    public static let isWeapon = Flag(id: "isWeapon", zil: "WEAPONBIT")
 
     /// The object is wearable.
     ///
     /// "The object can be worn. Given to garments and wearable equipment such as jewelry or a
     /// diving helmet. Only means that the object is wearable, not that it is actually being worn."
-    case isWearable
-
-    /// The object is a being worn.
-    ///
-    /// "This means that a wearable object is currently being worn."
-    case isBeingWorn
+    public static let isWearable = Flag(id: "isWearable", zil: "WEARBIT")
 
     /// The object should not be implicitly taken.
     ///
@@ -274,27 +311,27 @@ public enum Attribute: Equatable {
     /// "This is important if the object has a value and must be scored, or if the object has an
     /// NDESCBIT which must be cleared, or if you want taking the object to set a flag or queue a
     /// routine, or..."
-    case noImplicitTake
+    public static let noImplicitTake = Flag(id: "noImplicitTake", zil: "TRYTAKEBIT")
 
     /// The object omits an article.
     ///
     /// "The object's DESC doesn't not work with articles, and they should be omitted. An example is
     /// the ME object, which usually has the DESC 'you.' A verb default should say 'It smells just
     /// like you.' rather than 'It smells just like _a_ you.'"
-    case omitArticle
+    public static let omitArticle = Flag(id: "omitArticle", zil: "NARTICLEBIT")
 
     /// The object is a nounDescription.
     ///
     /// "The object shouldn't be described by the describers. This usually means that someone else,
     /// such as the room description, is describing the object. Any takeable object, once taken,
     /// should have its NDESCBIT cleared."
-    case omitDescription
+    public static let omitDescription = Flag(id: "omitDescription", zil: "NDESCBIT")
 
     /// The object should be omitted from "take all" operations.
     ///
     /// "This has something to do with telling a TAKE ALL not to take something, but I don't recall
     /// how it works. Help???"
-    case omitFromTakeAll
+    public static let omitFromTakeAll = Flag(id: "omitFromTakeAll", zil: "NALLBIT")
 
     /// Tells the parser not to complain when the player input is missing a noun.
     ///
@@ -309,134 +346,94 @@ public enum Attribute: Equatable {
     /// (or PRSI as the case may be) to the ROOMS object. Some games use RLANDBIT instead of the
     /// KLUDGEBIT; this saves a bit, since the parser won't 'find' a room, and no objects have the
     /// RLANDBIT."
-    case shouldKludge
-
-    /// A custom attribute.
-    case custom(String)
+    public static let shouldKludge = Flag(id: "shouldKludge", zil: "KLUDGEBIT")
 }
 
-public enum AttributeError: Error {
-    case illegalEmptyAttribute
-}
-
-extension Attribute {
-    public init(_ rawValue: String) throws {
-        guard !rawValue.isEmpty else {
-            throw AttributeError.illegalEmptyAttribute
+extension Flag {
+    /// Attempts to find a predefined flag matching the specified Zil string, and returns it if
+    /// found. Otherwise it returns a new custom `Flag` based on the specified values.
+    ///
+    /// - Parameters:
+    ///   - id: A proposed identifier in the case of a new custom flag.
+    ///   - zil: The flag's original Zil string value.
+    ///
+    /// - Returns: A predefined flag if a match was found, or a new custom `Flag` based on the
+    ///            specified values.
+    public static func find(
+        id: String,
+        zil: String
+    ) -> Flag {
+        if let flag = predefinedFlags.first(where: { $0.zil == zil }) {
+            return flag
         }
-
-        switch rawValue {
-        case "ACTORBIT":    self = .isActor
-        case "ATTACKBIT":   self = .isAttackable
-        case "BURNBIT":     self = .isBurnable
-        case "CLIMBBIT":    self = .isClimbable
-        case "CONTBIT":     self = .isContainer
-        case "DEVICEBIT":   self = .isDevice
-        case "DOORBIT":     self = .isDoor
-        case "DRINKBIT":    self = .isDrinkable
-        case "DROPBIT":     self = .catchesDroppedItems
-        case "EDIBLEBIT":   self = .isEdible
-        case "FEMALEBIT":   self = .isFemale
-        case "FIGHTBIT":    self = .isFightable
-        case "FLAMEBIT":    self = .isFlammable
-        case "FOODBIT":     self = .isFood
-        case "INBIT":       self = .inNotOn
-        case "INTEGRALBIT": self = .isIntegral
-        case "INVISIBLE":   self = .isInvisible
-        case "KLUDGEBIT":   self = .shouldKludge
-        case "LIGHTBIT":    self = .isLight
-        case "LOCKEDBIT":   self = .isLocked
-        case "MAZEBIT":     self = .isMaze
-        case "NALLBIT":     self = .omitFromTakeAll
-        case "NARTICLEBIT": self = .omitArticle
-        case "NDESCBIT":    self = .omitDescription
-        case "NONLANDBIT":  self = .isNotLand
-        case "ONBIT":       self = .isOn
-        case "OPENABLEBIT": self = .isOpenable
-        case "OPENBIT":     self = .isOpen
-        case "OUTSIDEBIT":  self = .isOutside
-        case "PARTBIT":     self = .isBodyPart
-        case "PERSONBIT":   self = .isPerson
-        case "PLURALBIT":   self = .isPlural
-        case "RAIRBIT":     self = .isMidAirLocation
-        case "READBIT":     self = .isReadable
-        case "RLANDBIT":    self = .isDryLand
-        case "RMUNGBIT":    self = .isDestroyed
-        case "RWATERBIT":   self = .isWaterLocation
-        case "SACREDBIT":   self = .isSacred
-        case "SEARCHBIT":   self = .isSearchable
-        case "STAGGERED":   self = .isStaggered
-        case "SURFACEBIT":  self = .isSurface
-        case "TAKEBIT":     self = .isTakable
-        case "TOOLBIT":     self = .isTool
-        case "TOUCHBIT":    self = .hasBeenTouched
-        case "TRANSBIT":    self = .isTransparent
-        case "TRYTAKEBIT":  self = .noImplicitTake
-        case "TURNBIT":     self = .isTurnable
-        case "VEHBIT":      self = .isVehicle
-        case "VOWELBIT":    self = .beginsWithVowel
-        case "WEAPONBIT":   self = .isWeapon
-        case "WEARBIT":     self = .isWearable
-        case "WORNBIT":     self = .isBeingWorn
-        default:            self = .custom(rawValue)
-        }
+        return Flag(
+            id: .init(rawValue: id),
+            zil: zil
+        )
     }
 
-    public var `case`: String {
-        switch self {
-        case .beginsWithVowel:     return ".beginsWithVowel"
-        case .catchesDroppedItems: return ".catchesDroppedItems"
-        case .custom(let attr):    return ".\(attr)"
-        case .hasBeenTouched:      return ".hasBeenTouched"
-        case .inNotOn:             return ".inNotOn"
-        case .isActor:             return ".isActor"
-        case .isAttackable:        return ".isAttackable"
-        case .isBeingWorn:         return ".isBeingWorn"
-        case .isBodyPart:          return ".isBodyPart"
-        case .isBurnable:          return ".isBurnable"
-        case .isClimbable:         return ".isClimbable"
-        case .isContainer:         return ".isContainer"
-        case .isDevice:            return ".isDevice"
-        case .isDoor:              return ".isDoor"
-        case .isDrinkable:         return ".isDrinkable"
-        case .isDryLand:           return ".isDryLand"
-        case .isEdible:            return ".isEdible"
-        case .isFemale:            return ".isFemale"
-        case .isFightable:         return ".isFightable"
-        case .isFlammable:         return ".isFlammable"
-        case .isFood:              return ".isFood"
-        case .isIntegral:          return ".isIntegral"
-        case .isInvisible:         return ".isInvisible"
-        case .isLight:             return ".isLight"
-        case .isLocked:            return ".isLocked"
-        case .isMaze:              return ".isMaze"
-        case .isMidAirLocation:    return ".isMidAirLocation"
-        case .isNotLand:           return ".isNotLand"
-        case .isOn:                return ".isOn"
-        case .isOpen:              return ".isOpen"
-        case .isOpenable:          return ".isOpenable"
-        case .isOutside:           return ".isOutside"
-        case .isPerson:            return ".isPerson"
-        case .isPlural:            return ".isPlural"
-        case .isReadable:          return ".isReadable"
-        case .isDestroyed:         return ".isDestroyed"
-        case .isSacred:            return ".isSacred"
-        case .isSearchable:        return ".isSearchable"
-        case .isStaggered:         return ".isStaggered"
-        case .isSurface:           return ".isSurface"
-        case .isTakable:           return ".isTakable"
-        case .isTool:              return ".isTool"
-        case .isTransparent:       return ".isTransparent"
-        case .isTurnable:          return ".isTurnable"
-        case .isVehicle:           return ".isVehicle"
-        case .isWaterLocation:     return ".isWaterLocation"
-        case .isWeapon:            return ".isWeapon"
-        case .isWearable:          return ".isWearable"
-        case .noImplicitTake:      return ".noImplicitTake"
-        case .omitArticle:         return ".omitArticle"
-        case .omitDescription:     return ".omitDescription"
-        case .omitFromTakeAll:     return ".omitFromTakeAll"
-        case .shouldKludge:        return ".shouldKludge"
-        }
+    /// All of the predefined flags.
+    private static var predefinedFlags: [Flag] = [
+        beginsWithVowel,
+        catchesDroppedItems,
+        hasBeenTouched,
+        isActor,
+        isAttackable,
+        isBeingWorn,
+        isBodyPart,
+        isBurnable,
+        isClimbable,
+        isContainer,
+        isDestroyed,
+        isDevice,
+        isDoor,
+        isDrinkable,
+        isDryLand,
+        isEdible,
+        isFemale,
+        isFightable,
+        isFlammable,
+        isFood,
+        isInNotOn,
+        isIntegral,
+        isInvisible,
+        isLight,
+        isLocked,
+        isMaze,
+        isMidAirLocation,
+        isNotLand,
+        isOn,
+        isOpen,
+        isOpenable,
+        isOutside,
+        isPerson,
+        isPlural,
+        isReadable,
+        isSacred,
+        isSearchable,
+        isStaggered,
+        isSurface,
+        isTakable,
+        isTool,
+        isTransparent,
+        isTurnable,
+        isVehicle,
+        isWaterLocation,
+        isWeapon,
+        isWearable,
+        noImplicitTake,
+        omitArticle,
+        omitDescription,
+        omitFromTakeAll,
+        shouldKludge,
+    ]
+}
+
+// MARK: - Flag.Error
+
+extension Flag {
+    public enum Error: Swift.Error {
+        case alreadyDefined
+        case illegalEmptyFlag
     }
 }

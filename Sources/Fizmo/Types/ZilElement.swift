@@ -7,12 +7,23 @@
 
 import Foundation
 
-/// Elements contained in arrays corresponding to ZIL Tables.
-public enum ZilElement {
+/// The set of Zil elements that can be contained in a Zil ``Table``.
+public enum ZilElement: Equatable {
+    /// A boolean element.
     case bool(Bool)
+
+    /// An integer element.
     case int(Int)
-    case object(String)
-    case room(String)
+
+    /// An object element.
+    case object(Object)
+
+    /// A room element.
+    case room(Room)
+
+    /// A string element.
     case string(String)
-    case table([ZilElement])
+
+    /// A table element.
+    case table(Table)
 }

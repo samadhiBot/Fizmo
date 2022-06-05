@@ -8,7 +8,6 @@
 import Foundation
 
 /// A protocol that contains functions corresponding to Zil's value assignment functions.
-/// 
 public protocol ZilAssignment {
     /// Set the value of `self` to the specified value.
     ///

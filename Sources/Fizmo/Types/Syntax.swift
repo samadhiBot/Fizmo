@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// <#Description#>
 public struct Syntax: Equatable {
     public let verb: String
     public let directObject: Object?
@@ -32,16 +33,16 @@ public struct Syntax: Equatable {
 extension Syntax {
     public struct Object: Equatable {
         public let preposition: String?
-        public let findAttribute: Attribute?
+        public let findFlag: Flag?
         public let searchFlags: [SearchFlag]
 
         public init(
             preposition: String? = nil,
-            where findAttribute: Attribute? = nil,
+            where findFlag: Flag? = nil,
             search searchFlags: [SearchFlag] = []
         ) {
             self.preposition = preposition
-            self.findAttribute = findAttribute
+            self.findFlag = findFlag
             self.searchFlags = searchFlags
         }
     }
