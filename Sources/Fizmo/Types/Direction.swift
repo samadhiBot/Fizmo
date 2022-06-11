@@ -10,41 +10,110 @@ import Foundation
 /// A type of ``Object`` that represents a movement direction.
 public class Direction: Object {
     /// Represents an exit to the north.
-    static let north = Direction(id: "NORTH")
+    public static let north = Direction(
+        id: "north",
+        synonyms: ["NORTH", "N"]
+    )
 
     /// Represents an exit to the east.
-    static let east = Direction(id: "EAST")
+    public static let east = Direction(
+        id: "east",
+        synonyms: ["EAST", "E"]
+    )
 
     /// Represents an exit to the west.
-    static let west = Direction(id: "WEST")
+    public static let west = Direction(
+        id: "west",
+        synonyms: ["WEST", "W"]
+    )
 
     /// Represents an exit to the south.
-    static let south = Direction(id: "SOUTH")
+    public static let south = Direction(
+        id: "south",
+        synonyms: ["SOUTH", "S"]
+    )
 
     /// Represents an exit to the northeast.
-    static let northEast = Direction(id: "NE")
+    public static let northEast = Direction(
+        id: "northEast",
+        synonyms: ["NORTHEAST", "NE"]
+    )
 
     /// Represents an exit to the northwest.
-    static let northWest = Direction(id: "NW")
+    public static let northWest = Direction(
+        id: "northWest",
+        synonyms: ["NORTHWEST", "NW"]
+    )
 
     /// Represents an exit to the southeast.
-    static let southEast = Direction(id: "SE")
+    public static let southEast = Direction(
+        id: "southEast",
+        synonyms: ["SOUTHEAST", "SE"]
+    )
 
     /// Represents an exit to the southwest.
-    static let southWest = Direction(id: "SW")
+    public static let southWest = Direction(
+        id: "southWest",
+        synonyms: ["SOUTHWEST", "SW"]
+    )
 
     /// Represents an exit up.
-    static let up = Direction(id: "UP")
+    public static let up = Direction(
+        id: "up",
+        synonyms: ["UP", "U"]
+    )
 
     /// Represents an exit down.
-    static let down = Direction(id: "DOWN")
+    public static let down = Direction(
+        id: "down",
+        synonyms: ["DOWN", "D"]
+    )
 
     /// Represents an exit into another location.
-    static let `in` = Direction(id: "IN")
+    public static let `in` = Direction(
+        id: "in",
+        synonyms: ["IN"]
+    )
 
     /// Represents an exit out of the current location.
-    static let out = Direction(id: "OUT")
+    public static let out = Direction(
+        id: "out",
+        synonyms: ["OUT"]
+    )
 }
+
+extension Direction {
+    /// Find a predefined `Direction` that matches the specified Zil atom.
+    ///
+    /// - Parameter zil: A Zil atom indicating a direction of movement.
+    ///
+    /// - Returns: A Fizmo `Direction` that matches the specified Zil atom, if one exists.
+    public static func find(_ zil: String) -> Direction? {
+        predefined.first {
+            $0.synonyms.contains(zil)
+        }
+    }
+
+    /// An array of all directions that are predefined in Fizmo.
+    public static var predefined: [Direction] {
+        [
+            .north,
+            .east,
+            .west,
+            .south,
+            .northEast,
+            .northWest,
+            .southEast,
+            .southWest,
+            .up,
+            .down,
+            .in,
+            .out,
+        ]
+    }
+}
+
+// MARK: - Conformances
 
 extension Direction: Hashable {
     public func hash(into hasher: inout Hasher) {

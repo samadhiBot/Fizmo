@@ -9,7 +9,8 @@ import Foundation
 
 /// Rooms are distinct locations in the world.
 final public class Room: Object {
-    /// <#Description#>
+    /// A dictionary containing each ``Direction`` and corresponding ``Movement`` that is possible
+    /// in the room.
     public private(set) var directions: [Direction: Movement]
 
     public init(

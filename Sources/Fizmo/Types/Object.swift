@@ -124,8 +124,8 @@ public class Object {
     /// Change the location of `self` to the specified ``Room`` or ``Object``.
     ///
     /// - Parameter to: The object to which `self` is moved.
-    func move(to: Object) {
-
+    func move(to other: Object) {
+        parent = other
     }
 }
 

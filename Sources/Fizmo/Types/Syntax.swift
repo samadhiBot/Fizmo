@@ -7,7 +7,10 @@
 
 import Foundation
 
-/// <#Description#>
+/// Represents a Zil
+/// [SYNTAX](https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#)
+/// definition, which specifies which action and pre-action routines should be called for a given
+/// verb phrase.
 public struct Syntax: Equatable {
     public let verb: String
     public let directObject: Object?
