@@ -15,6 +15,15 @@ public enum ZilElement: Equatable {
     /// An integer element.
     case int(Int)
 
+    /// An 8-bit integer (`byte`) element.
+    case int8(Int8)
+
+    /// A 16-bit integer (`word`) element.
+    case int16(Int16)
+
+    /// A 32-bit integer (`lexv`) element.
+    case int32(Int32)
+
     /// An object element.
     case object(Object)
 

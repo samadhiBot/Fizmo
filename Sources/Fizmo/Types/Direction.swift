@@ -89,28 +89,26 @@ extension Direction {
     ///
     /// - Returns: A Fizmo `Direction` that matches the specified Zil atom, if one exists.
     public static func find(_ zil: String) -> Direction? {
-        predefined.first {
+        predefinedDirections.first {
             $0.synonyms.contains(zil)
         }
     }
 
-    /// An array of all directions that are predefined in Fizmo.
-    public static var predefined: [Direction] {
-        [
-            .north,
-            .east,
-            .west,
-            .south,
-            .northEast,
-            .northWest,
-            .southEast,
-            .southWest,
-            .up,
-            .down,
-            .in,
-            .out,
-        ]
-    }
+    /// All directions that are predefined in Fizmo.
+    private static var predefinedDirections: [Direction] = [
+        north,
+        east,
+        west,
+        south,
+        northEast,
+        northWest,
+        southEast,
+        southWest,
+        up,
+        down,
+        `in`,
+        out,
+    ]
 }
 
 // MARK: - Conformances

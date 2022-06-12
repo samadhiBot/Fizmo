@@ -10,218 +10,62 @@ import Fizmo
 
 final class FlagTests: XCTestCase {
     func testPredefinedFlags() throws {
-        XCTAssertEqual(
-            Flag.find(id: "actorBit", zil: "ACTORBIT"),
-            Flag.isActor
-        )
-        XCTAssertEqual(
-            Flag.find(id: "attackBit", zil: "ATTACKBIT"),
-            Flag.isAttackable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "burnBit", zil: "BURNBIT"),
-            Flag.isBurnable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "climbBit", zil: "CLIMBBIT"),
-            Flag.isClimbable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "contBit", zil: "CONTBIT"),
-            Flag.isContainer
-        )
-        XCTAssertEqual(
-            Flag.find(id: "deviceBit", zil: "DEVICEBIT"),
-            Flag.isDevice
-        )
-        XCTAssertEqual(
-            Flag.find(id: "doorBit", zil: "DOORBIT"),
-            Flag.isDoor
-        )
-        XCTAssertEqual(
-            Flag.find(id: "drinkBit", zil: "DRINKBIT"),
-            Flag.isDrinkable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "dropBit", zil: "DROPBIT"),
-            Flag.catchesDroppedItems
-        )
-        XCTAssertEqual(
-            Flag.find(id: "edibleBit", zil: "EDIBLEBIT"),
-            Flag.isEdible
-        )
-        XCTAssertEqual(
-            Flag.find(id: "femaleBit", zil: "FEMALEBIT"),
-            Flag.isFemale
-        )
-        XCTAssertEqual(
-            Flag.find(id: "fightBit", zil: "FIGHTBIT"),
-            Flag.isFightable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "flameBit", zil: "FLAMEBIT"),
-            Flag.isFlammable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "foodBit", zil: "FOODBIT"),
-            Flag.isFood
-        )
-        XCTAssertEqual(
-            Flag.find(id: "inBit", zil: "INBIT"),
-            Flag.isInNotOn
-        )
-        XCTAssertEqual(
-            Flag.find(id: "integralBit", zil: "INTEGRALBIT"),
-            Flag.isIntegral
-        )
-        XCTAssertEqual(
-            Flag.find(id: "invisible", zil: "INVISIBLE"),
-            Flag.isInvisible
-        )
-        XCTAssertEqual(
-            Flag.find(id: "kludgeBit", zil: "KLUDGEBIT"),
-            Flag.shouldKludge
-        )
-        XCTAssertEqual(
-            Flag.find(id: "lightBit", zil: "LIGHTBIT"),
-            Flag.isLight
-        )
-        XCTAssertEqual(
-            Flag.find(id: "lockedBit", zil: "LOCKEDBIT"),
-            Flag.isLocked
-        )
-        XCTAssertEqual(
-            Flag.find(id: "mazeBit", zil: "MAZEBIT"),
-            Flag.isMaze
-        )
-        XCTAssertEqual(
-            Flag.find(id: "nallBit", zil: "NALLBIT"),
-            Flag.omitFromTakeAll
-        )
-        XCTAssertEqual(
-            Flag.find(id: "narticleBit", zil: "NARTICLEBIT"),
-            Flag.omitArticle
-        )
-        XCTAssertEqual(
-            Flag.find(id: "ndescBit", zil: "NDESCBIT"),
-            Flag.omitDescription
-        )
-        XCTAssertEqual(
-            Flag.find(id: "nonlandBit", zil: "NONLANDBIT"),
-            Flag.isNotLand
-        )
-        XCTAssertEqual(
-            Flag.find(id: "onBit", zil: "ONBIT"),
-            Flag.isOn
-        )
-        XCTAssertEqual(
-            Flag.find(id: "openableBit", zil: "OPENABLEBIT"),
-            Flag.isOpenable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "openBit", zil: "OPENBIT"),
-            Flag.isOpen
-        )
-        XCTAssertEqual(
-            Flag.find(id: "outsideBit", zil: "OUTSIDEBIT"),
-            Flag.isOutside
-        )
-        XCTAssertEqual(
-            Flag.find(id: "partBit", zil: "PARTBIT"),
-            Flag.isBodyPart
-        )
-        XCTAssertEqual(
-            Flag.find(id: "personBit", zil: "PERSONBIT"),
-            Flag.isPerson
-        )
-        XCTAssertEqual(
-            Flag.find(id: "pluralBit", zil: "PLURALBIT"),
-            Flag.isPlural
-        )
-        XCTAssertEqual(
-            Flag.find(id: "rairBit", zil: "RAIRBIT"),
-            Flag.isMidAirLocation
-        )
-        XCTAssertEqual(
-            Flag.find(id: "readBit", zil: "READBIT"),
-            Flag.isReadable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "rlandBit", zil: "RLANDBIT"),
-            Flag.isDryLand
-        )
-        XCTAssertEqual(
-            Flag.find(id: "rmungBit", zil: "RMUNGBIT"),
-            Flag.isDestroyed
-        )
-        XCTAssertEqual(
-            Flag.find(id: "rwaterBit", zil: "RWATERBIT"),
-            Flag.isWaterLocation
-        )
-        XCTAssertEqual(
-            Flag.find(id: "sacredBit", zil: "SACREDBIT"),
-            Flag.isSacred
-        )
-        XCTAssertEqual(
-            Flag.find(id: "searchBit", zil: "SEARCHBIT"),
-            Flag.isSearchable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "staggeRed", zil: "STAGGERED"),
-            Flag.isStaggered
-        )
-        XCTAssertEqual(
-            Flag.find(id: "surfaceBit", zil: "SURFACEBIT"),
-            Flag.isSurface
-        )
-        XCTAssertEqual(
-            Flag.find(id: "takeBit", zil: "TAKEBIT"),
-            Flag.isTakable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "toolBit", zil: "TOOLBIT"),
-            Flag.isTool
-        )
-        XCTAssertEqual(
-            Flag.find(id: "touchBit", zil: "TOUCHBIT"),
-            Flag.hasBeenTouched
-        )
-        XCTAssertEqual(
-            Flag.find(id: "transBit", zil: "TRANSBIT"),
-            Flag.isTransparent
-        )
-        XCTAssertEqual(
-            Flag.find(id: "trytakeBit", zil: "TRYTAKEBIT"),
-            Flag.noImplicitTake
-        )
-        XCTAssertEqual(
-            Flag.find(id: "turnBit", zil: "TURNBIT"),
-            Flag.isTurnable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "vehBit", zil: "VEHBIT"),
-            Flag.isVehicle
-        )
-        XCTAssertEqual(
-            Flag.find(id: "vowelBit", zil: "VOWELBIT"),
-            Flag.beginsWithVowel
-        )
-        XCTAssertEqual(
-            Flag.find(id: "weaponBit", zil: "WEAPONBIT"),
-            Flag.isWeapon
-        )
-        XCTAssertEqual(
-            Flag.find(id: "wearBit", zil: "WEARBIT"),
-            Flag.isWearable
-        )
-        XCTAssertEqual(
-            Flag.find(id: "wornBit", zil: "WORNBIT"),
-            Flag.isBeingWorn
-        )
+        XCTAssertEqual(Flag.find("actorBit"), Flag.isActor)
+        XCTAssertEqual(Flag.find("attackBit"), Flag.isAttackable)
+        XCTAssertEqual(Flag.find("burnBit"), Flag.isBurnable)
+        XCTAssertEqual(Flag.find("climbBit"), Flag.isClimbable)
+        XCTAssertEqual(Flag.find("contBit"), Flag.isContainer)
+        XCTAssertEqual(Flag.find("deviceBit"), Flag.isDevice)
+        XCTAssertEqual(Flag.find("doorBit"), Flag.isDoor)
+        XCTAssertEqual(Flag.find("drinkBit"), Flag.isDrinkable)
+        XCTAssertEqual(Flag.find("dropBit"), Flag.catchesDroppedItems)
+        XCTAssertEqual(Flag.find("edibleBit"), Flag.isEdible)
+        XCTAssertEqual(Flag.find("femaleBit"), Flag.isFemale)
+        XCTAssertEqual(Flag.find("fightBit"), Flag.isFightable)
+        XCTAssertEqual(Flag.find("flameBit"), Flag.isFlammable)
+        XCTAssertEqual(Flag.find("foodBit"), Flag.isFood)
+        XCTAssertEqual(Flag.find("inBit"), Flag.isInNotOn)
+        XCTAssertEqual(Flag.find("integralBit"), Flag.isIntegral)
+        XCTAssertEqual(Flag.find("invisible"), Flag.isInvisible)
+        XCTAssertEqual(Flag.find("kludgeBit"), Flag.shouldKludge)
+        XCTAssertEqual(Flag.find("lightBit"), Flag.isLight)
+        XCTAssertEqual(Flag.find("lockedBit"), Flag.isLocked)
+        XCTAssertEqual(Flag.find("mazeBit"), Flag.isMaze)
+        XCTAssertEqual(Flag.find("nallBit"), Flag.omitFromTakeAll)
+        XCTAssertEqual(Flag.find("narticleBit"), Flag.omitArticle)
+        XCTAssertEqual(Flag.find("ndescBit"), Flag.omitDescription)
+        XCTAssertEqual(Flag.find("nonlandBit"), Flag.isNotLand)
+        XCTAssertEqual(Flag.find("onBit"), Flag.isOn)
+        XCTAssertEqual(Flag.find("openableBit"), Flag.isOpenable)
+        XCTAssertEqual(Flag.find("openBit"), Flag.isOpen)
+        XCTAssertEqual(Flag.find("outsideBit"), Flag.isOutside)
+        XCTAssertEqual(Flag.find("partBit"), Flag.isBodyPart)
+        XCTAssertEqual(Flag.find("personBit"), Flag.isPerson)
+        XCTAssertEqual(Flag.find("pluralBit"), Flag.isPlural)
+        XCTAssertEqual(Flag.find("rairBit"), Flag.isMidAirLocation)
+        XCTAssertEqual(Flag.find("readBit"), Flag.isReadable)
+        XCTAssertEqual(Flag.find("rlandBit"), Flag.isDryLand)
+        XCTAssertEqual(Flag.find("rmungBit"), Flag.isDestroyed)
+        XCTAssertEqual(Flag.find("rwaterBit"), Flag.isWaterLocation)
+        XCTAssertEqual(Flag.find("sacredBit"), Flag.isSacred)
+        XCTAssertEqual(Flag.find("searchBit"), Flag.isSearchable)
+        XCTAssertEqual(Flag.find("staggered"), Flag.isStaggered)
+        XCTAssertEqual(Flag.find("surfaceBit"), Flag.isSurface)
+        XCTAssertEqual(Flag.find("takeBit"), Flag.isTakable)
+        XCTAssertEqual(Flag.find("toolBit"), Flag.isTool)
+        XCTAssertEqual(Flag.find("touchBit"), Flag.hasBeenTouched)
+        XCTAssertEqual(Flag.find("transBit"), Flag.isTransparent)
+        XCTAssertEqual(Flag.find("trytakeBit"), Flag.noImplicitTake)
+        XCTAssertEqual(Flag.find("turnBit"), Flag.isTurnable)
+        XCTAssertEqual(Flag.find("vehBit"), Flag.isVehicle)
+        XCTAssertEqual(Flag.find("vowelBit"), Flag.beginsWithVowel)
+        XCTAssertEqual(Flag.find("weaponBit"), Flag.isWeapon)
+        XCTAssertEqual(Flag.find("wearBit"), Flag.isWearable)
+        XCTAssertEqual(Flag.find("wornBit"), Flag.isBeingWorn)
     }
 
     func testCustomFlags() {
-        let spongeFlag = Flag.find(id: "spongeBit", zil: "SPONGEBIT")
+        let spongeFlag = Flag.find("spongeBit")
         XCTAssertEqual(spongeFlag.id, "spongeBit")
     }
 }
