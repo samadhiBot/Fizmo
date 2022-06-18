@@ -24,6 +24,10 @@ public enum ZilElement: Equatable {
     /// A 32-bit integer (`lexv`) element.
     case int32(Int32)
 
+    /// A `lexv` grouping consists of one 16-bit integer (`word`) element and two 8-bit integer
+    /// (`byte`) elements.
+    case lexv(Int16, Int8, Int8)
+
     /// An object element.
     case object(Object)
 
