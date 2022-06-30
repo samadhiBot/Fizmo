@@ -20,7 +20,7 @@ public struct Flag: Equatable {
     public let id: Flag.Identifier
 
     /// The flag's original Zil value.
-    let zil: String
+    public let zil: String
 }
 
 // MARK: - Flag.Identifier

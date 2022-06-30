@@ -171,3 +171,30 @@ extension Object.Identifier: ExpressibleByStringLiteral {
         rawValue = value
     }
 }
+
+// MARK: - Object.Identifier
+
+extension Object {
+    /// <#Description#>
+    public enum Property: Equatable {
+        case action
+        case adjectives
+        case capacity
+        case descriptionFunction
+        case firstDescription
+        case flags
+        case globals
+        case longDescription
+        case parent
+        case pseudos
+        case shortDescription
+        case size
+        case strength
+        case synonyms
+        case takeValue
+        case text
+        case vType
+        case value
+    }
+}
+
