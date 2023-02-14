@@ -9,6 +9,10 @@ import Fizmo
 import XCTest
 
 class FizmoTests: XCTestCase {
+    var knife = Object(id: "knife")
+    var sandwich = Object(id: "sandwich")
+    var troll = Object(id: "troll")
+
     var clearing = Room(id: "clearing")
     var forest1 = Room(id: "forest1")
     var forest2 = Room(id: "forest2")

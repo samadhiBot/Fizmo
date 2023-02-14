@@ -28,6 +28,9 @@ public enum ZilElement: Equatable {
     /// (`byte`) elements.
     case lexv(Int16, Int8, Int8)
 
+    /// A `nil` value element.
+    case none
+
     /// An object element.
     case object(Object)
 

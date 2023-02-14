@@ -17,17 +17,23 @@ public struct Table: Equatable {
     /// Any modifiers to specify the table's composition and behavior.
     let flags: [Flag]
 
-    /// Creates a new `Table` with the specified elements.
+    /// Creates a new `Table` with the specified elements and flags.
     ///
     /// - Parameters:
     ///   - elements: The elements contained in the table.
     ///   - flags: Any modifiers to specify the table's composition and behavior.
     public init(
         _ elements: ZilElement...,
-        flags: [Flag] = []
+        flags: Flag...
     ) {
         self.elements = elements
         self.flags = flags
+    }
+
+    /// Creates a new `Table` with no elements or flags.
+    public init() {
+        self.elements = []
+        self.flags = []
     }
 
     /// Creates a new `Table` per the specified parameters.
@@ -39,8 +45,8 @@ public struct Table: Equatable {
     ///               no defaults are specified, the table is filled with zeros.
     public init(
         count: Int,
-        defaults: [ZilElement] = [],
-        flags: [Flag] = []
+        defaults: ZilElement...,
+        flags: Flag...
     ) {
         self.elements = []
         self.flags = flags
@@ -48,6 +54,52 @@ public struct Table: Equatable {
             let el = defaults.isEmpty ? .int(0) : defaults[index % defaults.count]
             elements.append(el)
         }
+    }
+}
+
+extension Table {
+    /// Creates a new `Table` with the specified integer elements and flags.
+    ///
+    /// - Parameters:
+    ///   - ints: The integer elements contained in the table.
+    ///   - flags: Any modifiers to specify the table's composition and behavior.
+    public init(
+        _ ints: Int...,
+        flags: Flag...
+    ) {
+        self.elements = ints.map(ZilElement.int)
+        self.flags = flags
+    }
+
+    /// Creates a new `Table` with the specified object elements and flags.
+    ///
+    /// - Parameters:
+    ///   - objects: The object elements contained in the table.
+    ///   - flags: Any modifiers to specify the table's composition and behavior.
+    public init(
+        _ objects: Object...,
+        flags: Flag...
+    ) {
+        self.elements = objects.map { object in
+            if let room = object as? Room {
+                return .room(room)
+            }
+            return .object(object)
+        }
+        self.flags = flags
+    }
+
+    /// Creates a new `Table` with the specified string elements and flags.
+    ///
+    /// - Parameters:
+    ///   - strings: The string elements contained in the table.
+    ///   - flags: Any modifiers to specify the table's composition and behavior.
+    public init(
+        _ strings: String...,
+        flags: Flag...
+    ) {
+        self.elements = strings.map(ZilElement.string)
+        self.flags = flags
     }
 }
 
@@ -180,5 +232,13 @@ extension Table {
 
         /// Specifies that the table elements are 2 bytes in size.
         case word
+    }
+}
+
+// MARK: - Conformances
+
+extension Table.Flag: Comparable {
+    public static func < (lhs: Table.Flag, rhs: Table.Flag) -> Bool {
+        lhs.rawValue < rhs.rawValue
     }
 }

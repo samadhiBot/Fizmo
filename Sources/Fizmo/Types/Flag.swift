@@ -20,7 +20,7 @@ public struct Flag: Equatable {
     public let id: Flag.Identifier
 
     /// The flag's original Zil value.
-    let zil: String
+    public let zil: String
 }
 
 // MARK: - Flag.Identifier
@@ -424,6 +424,14 @@ extension Flag {
         omitFromTakeAll,
         shouldKludge,
     ]
+}
+
+// MARK: - Conformances
+
+extension Flag: Comparable {
+    public static func < (lhs: Flag, rhs: Flag) -> Bool {
+        lhs.id < rhs.id
+    }
 }
 
 // MARK: - Flag.Error

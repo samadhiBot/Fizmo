@@ -9,6 +9,8 @@ import Foundation
 
 public typealias Function = () -> Bool
 
+public class Room: Object {}
+
 /// Objects are things in the world with which the player can interact.
 public class Object {
     /// The object's unique identifier.
@@ -21,10 +23,20 @@ public class Object {
     public private(set) var adjectives: [String]
 
     /// <#Description#>
+    public private(set) var adventurerFunction: Function?
+
+    /// <#Description#>
     public private(set) var capacity: Int?
 
     /// <#Description#>
-    public private(set) var descriptionFunction: String?
+    public private(set) var containerFunction: Function?
+
+    /// <#Description#>
+    public private(set) var descriptionFunction: Function?
+
+    /// A dictionary containing each ``Direction`` and corresponding ``Movement`` that is possible
+    /// in the room.
+    public private(set) var directions: [Direction: Movement]
 
     /// <#Description#>
     public private(set) var firstDescription: String?
@@ -63,52 +75,66 @@ public class Object {
     public private(set) var text: String?
 
     /// <#Description#>
+    public private(set) var things: [Thing]
+
+    /// <#Description#>
     public private(set) var vType: Flag?
 
     /// <#Description#>
     public private(set) var value: Int?
 
+    /// <#Description#>
+    public private(set) var vehicleType: Bool
 
     public init(
         id: Object.Identifier,
         action: Function? = nil,
         adjectives: [String] = [],
-        flags: [Flag] = [],
+        adventurerFunction: Function? = nil,
         capacity: Int? = nil,
+        containerFunction: Function? = nil,
         description: String? = nil,
-        descriptionFunction: String? = nil,
+        descriptionFunction: Function? = nil,
+        directions: [Direction: Movement] = [:],
         firstDescription: String? = nil,
+        flags: [Flag] = [],
         globals: [Object] = [],
+        location: Object? = nil,
         longDescription: String? = nil,
-        parent: Object? = nil,
         pseudos: [String: Function] = [:],
         size: Int? = nil,
         strength: Int? = nil,
         synonyms: [String] = [],
         takeValue: Int? = nil,
         text: String? = nil,
+        things: [Thing] = [],
         vType: Flag? = nil,
-        value: Int? = nil
+        value: Int? = nil,
+        vehicleType: Bool = false
     ) {
-        self.id = id
         self.action = action
         self.adjectives = adjectives
-        self.flags = flags
+        self.adventurerFunction = adventurerFunction
         self.capacity = capacity
-        self.shortDescription = description
         self.descriptionFunction = descriptionFunction
+        self.directions = directions
         self.firstDescription = firstDescription
+        self.flags = flags
         self.globals = globals
+        self.id = id
         self.longDescription = longDescription
-        self.parent = parent
+        self.parent = location
         self.pseudos = pseudos
+        self.shortDescription = description
         self.size = size
         self.strength = strength
         self.synonyms = synonyms
         self.takeValue = takeValue
         self.text = text
+        self.things = things
         self.vType = vType
         self.value = value
+        self.vehicleType = vehicleType
     }
 
     /// Evaluates whether the object is located directly within the specified ``Room`` or
@@ -139,8 +165,11 @@ extension Object: CustomStringConvertible {
 
 extension Object: Equatable {
     public static func == (lhs: Object, rhs: Object) -> Bool {
-        lhs.id == rhs.id
+        lhs.id.rawValue == rhs.id.rawValue
     }
+}
+
+extension Object: Identifiable {
 }
 
 // MARK: - Object.Identifier
@@ -171,3 +200,30 @@ extension Object.Identifier: ExpressibleByStringLiteral {
         rawValue = value
     }
 }
+
+// MARK: - Object.Identifier
+
+extension Object {
+    /// <#Description#>
+    public enum Property: Equatable {
+        case action
+        case adjectives
+        case capacity
+        case descriptionFunction
+        case firstDescription
+        case flags
+        case globals
+        case longDescription
+        case parent
+        case pseudos
+        case shortDescription
+        case size
+        case strength
+        case synonyms
+        case takeValue
+        case text
+        case vType
+        case value
+    }
+}
+
