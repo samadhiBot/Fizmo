@@ -8,41 +8,40 @@
 import XCTest
 import Fizmo
 
-extension Direction {
-    /// Represents an exit toward land.
-    public static let land = Direction(
-        id: "land",
-        synonyms: ["LAND"]
-    )
-}
-
 final class DirectionTests: XCTestCase {
+    var land: Direction {
+        Direction(id: "land", synonyms: "LAND")
+    }
+    var directions: [Direction] {
+        Direction.defaults + [land]
+    }
+
     func testPredefinedDirections() throws {
-        XCTAssertEqual(Direction.find("NORTH"), .north)
-        XCTAssertEqual(Direction.find("N"), .north)
-        XCTAssertEqual(Direction.find("EAST"), .east)
-        XCTAssertEqual(Direction.find("E"), .east)
-        XCTAssertEqual(Direction.find("WEST"), .west)
-        XCTAssertEqual(Direction.find("W"), .west)
-        XCTAssertEqual(Direction.find("SOUTH"), .south)
-        XCTAssertEqual(Direction.find("S"), .south)
-        XCTAssertEqual(Direction.find("NORTHEAST"), .northEast)
-        XCTAssertEqual(Direction.find("NE"), .northEast)
-        XCTAssertEqual(Direction.find("NORTHWEST"), .northWest)
-        XCTAssertEqual(Direction.find("NW"), .northWest)
-        XCTAssertEqual(Direction.find("SOUTHEAST"), .southEast)
-        XCTAssertEqual(Direction.find("SE"), .southEast)
-        XCTAssertEqual(Direction.find("SOUTHWEST"), .southWest)
-        XCTAssertEqual(Direction.find("SW"), .southWest)
-        XCTAssertEqual(Direction.find("UP"), .up)
-        XCTAssertEqual(Direction.find("U"), .up)
-        XCTAssertEqual(Direction.find("DOWN"), .down)
-        XCTAssertEqual(Direction.find("D"), .down)
-        XCTAssertEqual(Direction.find("IN"), .in)
-        XCTAssertEqual(Direction.find("OUT"), .out)
+        XCTAssertEqual(directions.find("NORTH"), .north)
+        XCTAssertEqual(directions.find("N"), .north)
+        XCTAssertEqual(directions.find("EAST"), .east)
+        XCTAssertEqual(directions.find("E"), .east)
+        XCTAssertEqual(directions.find("WEST"), .west)
+        XCTAssertEqual(directions.find("W"), .west)
+        XCTAssertEqual(directions.find("SOUTH"), .south)
+        XCTAssertEqual(directions.find("S"), .south)
+        XCTAssertEqual(directions.find("NORTHEAST"), .northEast)
+        XCTAssertEqual(directions.find("NE"), .northEast)
+        XCTAssertEqual(directions.find("NORTHWEST"), .northWest)
+        XCTAssertEqual(directions.find("NW"), .northWest)
+        XCTAssertEqual(directions.find("SOUTHEAST"), .southEast)
+        XCTAssertEqual(directions.find("SE"), .southEast)
+        XCTAssertEqual(directions.find("SOUTHWEST"), .southWest)
+        XCTAssertEqual(directions.find("SW"), .southWest)
+        XCTAssertEqual(directions.find("UP"), .up)
+        XCTAssertEqual(directions.find("U"), .up)
+        XCTAssertEqual(directions.find("DOWN"), .down)
+        XCTAssertEqual(directions.find("D"), .down)
+        XCTAssertEqual(directions.find("IN"), .in)
+        XCTAssertEqual(directions.find("OUT"), .out)
     }
 
     func testCustomDirection() throws {
-        XCTAssertEqual(Direction.find("LAND"), .land)
+        XCTAssertEqual(directions.find("LAND"), land)
     }
 }

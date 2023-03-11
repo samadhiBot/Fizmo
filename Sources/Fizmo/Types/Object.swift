@@ -6,37 +6,34 @@
 //
 
 import Foundation
-
-public typealias Function = () -> Bool
-
-public class Room: Object {}
+import Identity
 
 /// Objects are things in the world with which the player can interact.
-public class Object {
+public final class Object: Codable, Identifiable {
     /// The object's unique identifier.
-    public let id: Object.Identifier
+    public let id: Object.ID
 
     /// <#Description#>
-    public private(set) var action: Function?
+    public private(set) var action: Routine.ID?
 
     /// <#Description#>
     public private(set) var adjectives: [String]
 
     /// <#Description#>
-    public private(set) var adventurerFunction: Function?
+    public private(set) var adventurerFunction: Routine.ID?
 
     /// <#Description#>
     public private(set) var capacity: Int?
 
     /// <#Description#>
-    public private(set) var containerFunction: Function?
+    public private(set) var containerFunction: Routine.ID?
 
     /// <#Description#>
-    public private(set) var descriptionFunction: Function?
+    public private(set) var descriptionFunction: Routine.ID?
 
     /// A dictionary containing each ``Direction`` and corresponding ``Movement`` that is possible
     /// in the room.
-    public private(set) var directions: [Direction: Movement]
+    public private(set) var directions: [Direction.ID: Movement]
 
     /// <#Description#>
     public private(set) var firstDescription: String?
@@ -54,7 +51,7 @@ public class Object {
     public private(set) var parent: Object?
 
     /// <#Description#>
-    public private(set) var pseudos: [String: Function]
+    public private(set) var pseudos: [String: Routine.ID]
 
     /// <#Description#>
     public private(set) var shortDescription: String?
@@ -87,21 +84,21 @@ public class Object {
     public private(set) var vehicleType: Bool
 
     public init(
-        id: Object.Identifier,
-        action: Function? = nil,
+        id: Object.ID,
+        action: Routine.ID? = nil,
         adjectives: [String] = [],
-        adventurerFunction: Function? = nil,
+        adventurerFunction: Routine.ID? = nil,
         capacity: Int? = nil,
-        containerFunction: Function? = nil,
+        containerFunction: Routine.ID? = nil,
         description: String? = nil,
-        descriptionFunction: Function? = nil,
+        descriptionFunction: Routine.ID? = nil,
         directions: [Direction: Movement] = [:],
         firstDescription: String? = nil,
         flags: [Flag] = [],
         globals: [Object] = [],
         location: Object? = nil,
         longDescription: String? = nil,
-        pseudos: [String: Function] = [:],
+        pseudos: [String: Routine.ID] = [:],
         size: Int? = nil,
         strength: Int? = nil,
         synonyms: [String] = [],
@@ -117,7 +114,7 @@ public class Object {
         self.adventurerFunction = adventurerFunction
         self.capacity = capacity
         self.descriptionFunction = descriptionFunction
-        self.directions = directions
+        self.directions = directions.reduce(into: [:], { $0[$1.key.id] = $1.value })
         self.firstDescription = firstDescription
         self.flags = flags
         self.globals = globals
@@ -169,39 +166,7 @@ extension Object: Equatable {
     }
 }
 
-extension Object: Identifiable {
-}
-
-// MARK: - Object.Identifier
-
-extension Object {
-    /// A unique object identifier.
-    public struct Identifier: Hashable {
-        let rawValue: String
-    }
-}
-
-extension Object.Identifier: Comparable {
-    public static func < (lhs: Object.Identifier, rhs: Object.Identifier) -> Bool {
-        lhs.rawValue < rhs.rawValue
-    }
-}
-
-extension Object.Identifier: CustomStringConvertible {
-    public var description: String {
-        return rawValue
-    }
-}
-
-extension Object.Identifier: ExpressibleByStringLiteral {
-    public typealias StringLiteralType = String
-
-    public init(stringLiteral value: String) {
-        rawValue = value
-    }
-}
-
-// MARK: - Object.Identifier
+// MARK: - Object.Property
 
 extension Object {
     /// <#Description#>

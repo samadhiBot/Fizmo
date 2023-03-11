@@ -8,7 +8,7 @@
 import Foundation
 
 /// The set of Zil elements that can be contained in a Zil ``Table``.
-public enum ZilElement: Equatable {
+public enum ZilElement: Codable, Equatable {
     /// A boolean element.
     case bool(Bool)
 
@@ -34,12 +34,36 @@ public enum ZilElement: Equatable {
     /// An object element.
     case object(Object)
 
-    /// A room element.
-    case room(Room)
-
     /// A string element.
     case string(String)
 
     /// A table element.
     case table(Table)
+}
+
+extension ZilElement {
+    /// Creates an object element representing a room.
+    public static func room(_ room: Room) -> ZilElement {
+        .object(room)
+    }
+}
+
+// MARK: - Conformances
+
+extension ZilElement: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self = .bool(value)
+    }
+}
+
+extension ZilElement: ExpressibleByIntegerLiteral {
+    public init(integerLiteral value: IntegerLiteralType) {
+        self = .int(value)
+    }
+}
+
+extension ZilElement: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        self = .string(value)
+    }
 }

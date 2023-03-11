@@ -9,7 +9,7 @@ import XCTest
 import Fizmo
 
 final class FlagTests: XCTestCase {
-    func testPredefinedFlags() throws {
+    func testDefaults() throws {
         XCTAssertEqual(Flag.find("actorBit"), Flag.isActor)
         XCTAssertEqual(Flag.find("attackBit"), Flag.isAttackable)
         XCTAssertEqual(Flag.find("burnBit"), Flag.isBurnable)

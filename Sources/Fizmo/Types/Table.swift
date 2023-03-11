@@ -10,12 +10,12 @@ import Foundation
 /// A type that represents the Zil
 /// [Table](https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#heading=h.2kz067v)
 /// structure.
-public struct Table: Equatable {
+public struct Table: Codable, Equatable {
     /// The elements contained in the table.
     var elements: [ZilElement]
 
     /// Any modifiers to specify the table's composition and behavior.
-    let flags: [Flag]
+    let flags: [Table.Flag]
 
     /// Creates a new `Table` with the specified elements and flags.
     ///
@@ -91,7 +91,7 @@ extension Table {
 
     /// Creates a new `Table` with the specified string elements and flags.
     ///
-    /// - Parameters:
+    /// - Parameters:œ
     ///   - strings: The string elements contained in the table.
     ///   - flags: Any modifiers to specify the table's composition and behavior.
     public init(
@@ -206,7 +206,7 @@ extension Table {
 
 extension Table {
     /// The set of modifiers that specify the table's composition and behavior.
-    public enum Flag: String {
+    public enum Flag: String, Codable {
         /// Specifies that the table elements are 1 byte in size.
         case byte
 

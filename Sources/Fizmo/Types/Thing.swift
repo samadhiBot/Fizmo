@@ -8,9 +8,9 @@
 import Foundation
 
 /// <#Description#>
-public struct Thing {
+public struct Thing: Codable {
     /// <#Description#>
-    public private(set) var action: Function?
+    public private(set) var action: Routine.ID?
 
     /// <#Description#>
     public private(set) var adjectives: [String]
@@ -19,7 +19,7 @@ public struct Thing {
     public private(set) var nouns: [String]
 
     public init(
-        action: Function? = nil,
+        action: Routine.ID? = nil,
         adjectives: [String] = [],
         nouns: [String] = []
     ) {
