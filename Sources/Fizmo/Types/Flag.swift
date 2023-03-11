@@ -21,7 +21,7 @@ public struct Flag: Codable, Equatable, Identifiable {
     public let id: Flag.ID
 
     /// The flag's original Zil value.
-    let zil: String
+    public let zil: String
 
     public init(
         id: Flag.ID,
