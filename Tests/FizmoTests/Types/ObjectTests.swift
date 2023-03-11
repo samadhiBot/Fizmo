@@ -9,7 +9,27 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class ObjectTests: XCTestCase {
+final class ObjectTests: FizmoTests {
+    
+}
+
+// MARK: - Encoding / decoding
+
+extension ObjectTests {
+    func testObjectEncoding() throws {
+        XCTAssertNoDifference(
+            try knife.encoded().json,
+            knifeJSON
+        )
+    }
+
+    func testObjectDecoding() throws {
+        XCTAssertNoDifference(
+            try knifeJSON.decoded(),
+            knife
+        )
+    }
+
     /// The `advertisement` (ADVERTISEMENT) object.
 //    var advertisement = Object(
 //        name: "advertisement",

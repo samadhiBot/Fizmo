@@ -9,13 +9,7 @@ import CustomDump
 import Fizmo
 import XCTest
 
-final class DirectionTests: XCTestCase {
-    var land: Direction {
-        Direction(
-            id: "land",
-            synonyms: "LAND"
-        )
-    }
+final class DirectionTests: FizmoTests {
     var directions: [Direction] {
         Direction.defaults + [land]
     }

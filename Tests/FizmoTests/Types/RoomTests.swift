@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class RoomTests: XCTestCase {
+final class RoomTests: FizmoTests {
     func testCircularReferences() {
         /// The `rooms` (ROOMS) object.
         let rooms = Object(
@@ -37,3 +37,20 @@ final class RoomTests: XCTestCase {
     }
 }
 
+// MARK: - Encoding / decoding
+
+extension RoomTests {
+    func testRoomEncoding() throws {
+        XCTAssertNoDifference(
+            try westOfHouse.encoded().json,
+            westOfHouseJSON
+        )
+    }
+
+    func testRoomDecoding() throws {
+        XCTAssertNoDifference(
+            try westOfHouseJSON.decoded(),
+            westOfHouse
+        )
+    }
+}

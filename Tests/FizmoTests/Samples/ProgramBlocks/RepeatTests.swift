@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class RepeatTests: XCTestCase {
+final class RepeatTests: FizmoTests {
     let isFunnyReturn: Bool = true
 
     // https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#heading=h.hkkpf6

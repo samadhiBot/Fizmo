@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class ZilBooleanTests: XCTestCase {
+final class ZilBooleanTests: FizmoTests {
     func testAnd() {
         XCTAssertTrue(.and(true))
         XCTAssertTrue(.and(true, true, true))

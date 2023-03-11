@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class ZilComparableTests: XCTestCase {
+final class ZilComparableTests: FizmoTests {
 
     // MARK: - Equals
 

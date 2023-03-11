@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class SyntaxTests: XCTestCase {
+final class SyntaxTests: FizmoTests {
     func testQuitSyntax() {
         _ = Syntax(
             verb: "quit",

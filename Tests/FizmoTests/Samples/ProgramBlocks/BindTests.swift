@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class BindTests: XCTestCase {
+final class BindTests: FizmoTests {
     // https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#heading=h.12jfdx2
 
     /// The `bind1` (BIND-1) routine.

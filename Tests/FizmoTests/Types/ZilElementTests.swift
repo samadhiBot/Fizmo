@@ -9,6 +9,11 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class ZilElementTests: XCTestCase {
-
+final class ZilElementTests: FizmoTests {
+    func testRoomObjectEquatable() {
+        XCTAssertNoDifference(
+            ZilElement.object(Object(id: "tree")),
+            ZilElement.room(Object(id: "tree"))
+        )
+    }
 }

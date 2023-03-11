@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class DefineTests: XCTestCase {
+final class DefineTests: FizmoTests {
     @discardableResult
     /// The `incForm` (INC-FORM) function.
     func incForm(a: Int) -> Int {

@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class Functiontests: XCTestCase {
+final class Functiontests: FizmoTests {
     func testSimpleAddFunction() {
         let addFunction: () -> Int = {
             var x: Int = 1

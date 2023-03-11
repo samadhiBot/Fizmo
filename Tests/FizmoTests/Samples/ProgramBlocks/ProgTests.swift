@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class ProgTests: XCTestCase {
+final class ProgTests: FizmoTests {
     let isFunnyReturn: Bool = true
 
     // https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#heading=h.1bkyn9b

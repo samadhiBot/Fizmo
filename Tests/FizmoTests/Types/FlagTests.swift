@@ -9,7 +9,7 @@ import CustomDump
 import Fizmo
 import XCTest
 
-final class FlagTests: XCTestCase {
+final class FlagTests: FizmoTests {
     func testPublicInitializer() {
         let isUnctuous = Flag(
             id: "isUnctuous",

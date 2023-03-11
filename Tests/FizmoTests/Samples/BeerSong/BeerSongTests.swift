@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class BeerSongTests: XCTestCase {
+final class BeerSongTests: FizmoTests {
     func testBeerSongRoutineVersion() {
         let song = BeerSong.RoutineVersion()
         song.go()

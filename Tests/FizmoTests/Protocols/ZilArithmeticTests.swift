@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class ZilArithmetic: XCTestCase {
+final class ZilArithmetic: FizmoTests {
     func testStaticAdd() {
         XCTAssertEqual(.add(2, 3, 4), 9)
     }

@@ -9,7 +9,7 @@ import CustomDump
 import XCTest
 import Fizmo
 
-final class AgainTests: XCTestCase {
+final class AgainTests: FizmoTests {
     // https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#heading=h.1au1eum
 
     /// The `again1` (AGAIN-1) routine.
