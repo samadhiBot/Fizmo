@@ -17,6 +17,8 @@ extension MicroCosm {
     }
 }
 
+// MARK: - Action functions
+
 extension MicroCosm {
     /// Increments the score by 1 and returns true if the score is greater than zero, else false.
     func incrementScore() -> Bool {
