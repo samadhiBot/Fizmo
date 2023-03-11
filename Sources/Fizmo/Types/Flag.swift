@@ -503,8 +503,8 @@ extension Flag {
         )
     }
 
-    /// All of the predefined flags.
-    private static var defaults: [Flag] = [
+    /// The set of predefined Fizmo flags.
+    private static let defaults: [Flag] = [
         beginsWithVowel,
         catchesDroppedItems,
         hasBeenTouched,
@@ -565,14 +565,5 @@ extension Flag {
 extension Flag: Comparable {
     public static func < (lhs: Flag, rhs: Flag) -> Bool {
         lhs.id.rawValue < rhs.id.rawValue
-    }
-}
-
-// MARK: - Flag.Error
-
-extension Flag {
-    public enum Error: Swift.Error {
-        case alreadyDefined
-        case illegalEmptyFlag
     }
 }

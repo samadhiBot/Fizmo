@@ -5,8 +5,9 @@
 //  Created by Chris Sessions on 2/14/23.
 //
 
-import XCTest
+import CustomDump
 import Fizmo
+import XCTest
 
 final class DirectionTests: XCTestCase {
     var land: Direction {

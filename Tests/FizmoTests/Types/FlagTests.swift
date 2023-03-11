@@ -5,11 +5,27 @@
 //  Created by Chris Sessions on 3/19/22.
 //
 
-import XCTest
+import CustomDump
 import Fizmo
+import XCTest
 
 final class FlagTests: XCTestCase {
-    func testDefaults() throws {
+    func testPublicInitializer() {
+        let isUnctuous = Flag(
+            id: "isUnctuous",
+            zil: "unctuousBit"
+        )
+
+        XCTAssertNoDifference(isUnctuous.id, "isUnctuous")
+    }
+
+    func testFindOrCreate() {
+        let spongeFlag = Flag.findOrCreate("spongeBit")
+        XCTAssertEqual(spongeFlag.id, Flag.ID(rawValue: "spongeBit"))
+        XCTAssertEqual(Flag.findOrCreate("spongeBit"), spongeFlag)
+    }
+
+    func testFindOrCreateDefaultFlags() throws {
         XCTAssertEqual(Flag.findOrCreate("actorBit"), Flag.isActor)
         XCTAssertEqual(Flag.findOrCreate("attackBit"), Flag.isAttackable)
         XCTAssertEqual(Flag.findOrCreate("burnBit"), Flag.isBurnable)
@@ -62,11 +78,5 @@ final class FlagTests: XCTestCase {
         XCTAssertEqual(Flag.findOrCreate("weaponBit"), Flag.isWeapon)
         XCTAssertEqual(Flag.findOrCreate("wearBit"), Flag.isWearable)
         XCTAssertEqual(Flag.findOrCreate("wornBit"), Flag.isBeingWorn)
-    }
-
-    func testCustomFlags() {
-        let spongeFlag = Flag.findOrCreate("spongeBit")
-        XCTAssertEqual(spongeFlag.id, Flag.ID(rawValue: "spongeBit"))
-        XCTAssertEqual(Flag.findOrCreate("spongeBit"), spongeFlag)
     }
 }
