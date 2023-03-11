@@ -1,6 +1,6 @@
 //
 //  Encodable+ext.swift
-//  MiniFizmo
+//  Fizmo
 //
 //  Created by Chris Sessions on 2/14/23.
 //

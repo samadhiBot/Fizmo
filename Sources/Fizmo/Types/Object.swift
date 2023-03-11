@@ -168,27 +168,26 @@ extension Object: Equatable {
 
 // MARK: - Object.Property
 
-extension Object {
-    /// <#Description#>
-    public enum Property: Equatable {
-        case action
-        case adjectives
-        case capacity
-        case descriptionFunction
-        case firstDescription
-        case flags
-        case globals
-        case longDescription
-        case parent
-        case pseudos
-        case shortDescription
-        case size
-        case strength
-        case synonyms
-        case takeValue
-        case text
-        case vType
-        case value
-    }
-}
-
+//extension Object {
+//    /// <#Description#>
+//    public enum Property: Equatable {
+//        case action
+//        case adjectives
+//        case capacity
+//        case descriptionFunction
+//        case firstDescription
+//        case flags
+//        case globals
+//        case longDescription
+//        case parent
+//        case pseudos
+//        case shortDescription
+//        case size
+//        case strength
+//        case synonyms
+//        case takeValue
+//        case text
+//        case vType
+//        case value
+//    }
+//}

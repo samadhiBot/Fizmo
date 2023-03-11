@@ -1,6 +1,6 @@
 //
 //  String+ext.swift
-//  MiniFizmo
+//  Fizmo
 //
 //  Created by Chris Sessions on 2/15/23.
 //

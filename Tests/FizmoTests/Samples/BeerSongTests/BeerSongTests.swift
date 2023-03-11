@@ -1,6 +1,6 @@
 //
 //  BeerSongTests.swift
-//  Fizmo
+//  BeerSong
 //
 //  Created by Chris Sessions on 3/23/22.
 //
