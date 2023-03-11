@@ -486,21 +486,19 @@ extension Flag {
 }
 
 extension Flag {
-    /// Attempts to find a predefined flag matching the specified Zil string, and returns it if
-    /// found. Otherwise it returns a new custom `Flag` based on the specified values.
+    /// Attempts to find a predefined flag matching the specified Zil string, returning what it
+    /// finds. If no matching flag exists, it creates a new flag based on the Zil string.
     ///
-    /// - Parameters:
-    ///   - id: A proposed identifier in the case of a new custom flag.
-    ///   - zil: The flag's original Zil string value.
+    /// - Parameter zil: The flag's original Zil string value.
     ///
     /// - Returns: A predefined flag if a match was found, or a new custom `Flag` based on the
-    ///            specified values.
-    public static func find(_ zil: String) -> Flag {
+    ///            Zil string
+    public static func findOrCreate(_ zil: String) -> Flag {
         if let flag = defaults.first(where: { $0.zil == zil }) {
             return flag
         }
         return Flag(
-            id: .init(rawValue: zil),
+            id: Flag.ID(rawValue: zil),
             zil: zil
         )
     }

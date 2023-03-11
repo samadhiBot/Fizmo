@@ -10,7 +10,10 @@ import Fizmo
 
 final class DirectionTests: XCTestCase {
     var land: Direction {
-        Direction(id: "land", synonyms: "LAND")
+        Direction(
+            id: "land",
+            synonyms: "LAND"
+        )
     }
     var directions: [Direction] {
         Direction.defaults + [land]
@@ -43,5 +46,22 @@ final class DirectionTests: XCTestCase {
 
     func testCustomDirection() throws {
         XCTAssertEqual(directions.find("LAND"), land)
+    }
+
+    func testCaseInsensitiveFind() throws {
+        XCTAssertEqual(directions.find("LAND"), land)
+        XCTAssertEqual(directions.find("Land"), land)
+        XCTAssertEqual(directions.find("land"), land)
+
+        XCTAssertEqual(directions.find("N"), .north)
+        XCTAssertEqual(directions.find("n"), .north)
+
+        XCTAssertEqual(directions.find("NW"), .northWest)
+        XCTAssertEqual(directions.find("Nw"), .northWest)
+        XCTAssertEqual(directions.find("nw"), .northWest)
+
+        XCTAssertEqual(directions.find("SOUTHEAST"), .southEast)
+        XCTAssertEqual(directions.find("Southeast"), .southEast)
+        XCTAssertEqual(directions.find("southeast"), .southEast)
     }
 }
