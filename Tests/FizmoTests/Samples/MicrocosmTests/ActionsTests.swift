@@ -12,8 +12,8 @@ import XCTest
 
 final class ActionsTests: FizmoTests {
     func testActions() throws {
-        let action = try XCTUnwrap(MicroCosm.shared.objects.mailbox.action)
-        let function = try XCTUnwrap(MicroCosm.shared.actions[action])
+        let action = try XCTUnwrap(shared.objects.mailbox.action)
+        let function = try XCTUnwrap(shared.actions[action])
         guard case .voidVoid(let mailboxFunc) = function else {
             XCTFail("Didn't find mailboxFunc")
             return

@@ -15,6 +15,8 @@ final class MicroCosm {
     let objects: Objects
     let rooms: Rooms
 
+    static let shared = MicroCosm()
+
     private init() {
         constants = Constants()
         directions = Directions.combined
@@ -22,6 +24,4 @@ final class MicroCosm {
         objects = Objects()
         rooms = Rooms()
     }
-
-    private(set) static var shared = MicroCosm()
 }

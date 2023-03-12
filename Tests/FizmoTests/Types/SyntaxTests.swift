@@ -13,7 +13,7 @@ final class SyntaxTests: FizmoTests {
     func testQuitSyntax() {
         _ = Syntax(
             verb: "quit",
-            actionRoutineName: "vQuit"
+            action: "vQuit"
         )
     }
 
@@ -21,7 +21,7 @@ final class SyntaxTests: FizmoTests {
         _ = Syntax(
             verb: "contemplate",
             directObject: Syntax.Object(),
-            actionRoutineName: "vThinkAbout"
+            action: "vThinkAbout"
         )
     }
 
@@ -32,7 +32,7 @@ final class SyntaxTests: FizmoTests {
                 where: .isTakable,
                 search: [.many, .onGround, .inRoom]
             ),
-            actionRoutineName: "vTake"
+            action: "vTake"
         )
     }
 
@@ -47,8 +47,8 @@ final class SyntaxTests: FizmoTests {
                 where: .isContainer,
                 search: [.inRoom, .many, .onGround]
             ),
-            actionRoutineName: "vPutIn",
-            preActionRoutineName: "prePutIn"
+            action: "vPutIn",
+            preAction: "prePutIn"
         )
     }
 }

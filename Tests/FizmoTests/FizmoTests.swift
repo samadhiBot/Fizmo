@@ -9,6 +9,7 @@ import Fizmo
 import XCTest
 
 class FizmoTests: XCTestCase {
+    lazy var shared: MicroCosm = MicroCosm.shared
 
     // MARK: - Directions
 

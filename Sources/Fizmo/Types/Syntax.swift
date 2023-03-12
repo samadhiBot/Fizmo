@@ -6,26 +6,27 @@
 //
 
 import Foundation
+import Identity
 
 /// Represents a Zil
 /// [SYNTAX](https://docs.google.com/document/d/11Kz3tknK05hb0Cw41HmaHHkgR9eh0qNLAbE9TzZe--c/edit#)
 /// definition, which specifies which action and pre-action routines should be called for a given
 /// verb phrase.
-public struct Syntax: Equatable {
-    public let verb: String
+public struct Syntax: Equatable, Identifiable {
+    public let id: Syntax.ID
     public let directObject: Object?
     public let indirectObject: Object?
     public let action: Routine.ID
     public let preAction: Routine.ID?
 
     public init(
-        verb: String,
+        verb: Syntax.ID,
         directObject: Object? = nil,
         indirectObject: Object? = nil,
         action: Routine.ID,
         preAction: Routine.ID? = nil
     ) {
-        self.verb = verb
+        self.id = verb
         self.directObject = directObject
         self.indirectObject = indirectObject
         self.action = action

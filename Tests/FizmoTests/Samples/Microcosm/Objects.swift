@@ -8,6 +8,9 @@
 import Fizmo
 
 class Objects: Codable {
+    static var Global: Globals { MicroCosm.shared.globals }
+    static var Room: Rooms { MicroCosm.shared.rooms }
+
     var jackpot = Object(
         id: "jackpot",
         action: "incrementScore"
