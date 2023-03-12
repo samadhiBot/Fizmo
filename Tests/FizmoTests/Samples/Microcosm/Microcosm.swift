@@ -7,6 +7,7 @@
 
 import Fizmo
 
+/// Represents the MicroCosm game.
 final class MicroCosm {
     let constants: Constants
     let directions: [Direction]

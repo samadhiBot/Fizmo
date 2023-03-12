@@ -15,21 +15,21 @@ public struct Syntax: Equatable {
     public let verb: String
     public let directObject: Object?
     public let indirectObject: Object?
-    public let actionRoutineName: String
-    public let preActionRoutineName: String?
+    public let action: Routine.ID
+    public let preAction: Routine.ID?
 
     public init(
         verb: String,
         directObject: Object? = nil,
         indirectObject: Object? = nil,
-        actionRoutineName: String,
-        preActionRoutineName: String? = nil
+        action: Routine.ID,
+        preAction: Routine.ID? = nil
     ) {
         self.verb = verb
         self.directObject = directObject
         self.indirectObject = indirectObject
-        self.actionRoutineName = actionRoutineName
-        self.preActionRoutineName = preActionRoutineName
+        self.action = action
+        self.preAction = preAction
     }
 }
 
