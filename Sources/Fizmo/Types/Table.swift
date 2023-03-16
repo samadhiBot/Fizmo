@@ -16,7 +16,9 @@ public struct Table: Codable, Equatable {
 
     /// Any modifiers to specify the table's composition and behavior.
     let flags: [Table.Flag]
+}
 
+extension Table {
     /// Creates a new `Table` with the specified elements and flags.
     ///
     /// - Parameters:
@@ -81,10 +83,10 @@ extension Table {
         flags: Flag...
     ) {
         self.elements = objects.map { object in
-            if let room = object as? Room {
-                return .room(room)
-            }
-            return .object(object)
+//            if let room = object as? Room {
+//                return .room(room.id)
+//            }
+            return .object(object.id)
         }
         self.flags = flags
     }

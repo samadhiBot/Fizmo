@@ -42,13 +42,13 @@ public final class Object: Codable, Identifiable {
     public private(set) var flags: [Flag]
 
     /// <#Description#>
-    public private(set) var globals: [Object]
+    public private(set) var globals: [Object.ID]
 
     /// <#Description#>
     public private(set) var longDescription: String?
 
     /// <#Description#>
-    public private(set) var parent: Object?
+    public private(set) var parent: Object.ID?
 
     /// <#Description#>
     public private(set) var pseudos: [String: Routine.ID]
@@ -95,8 +95,8 @@ public final class Object: Codable, Identifiable {
         directions: [Direction: Movement] = [:],
         firstDescription: String? = nil,
         flags: [Flag] = [],
-        globals: [Object] = [],
-        location: Object? = nil,
+        globals: [Object.ID] = [],
+        location: Object.ID? = nil,
         longDescription: String? = nil,
         pseudos: [String: Routine.ID] = [:],
         size: Int? = nil,
@@ -140,14 +140,14 @@ public final class Object: Codable, Identifiable {
     /// - Parameter other: The room or object in which to look for `self`.
     ///
     /// - Returns: Whether `self` is in the specified object.
-    func isIn(_ other: Object) -> Bool {
+    func isIn(_ other: Object.ID) -> Bool {
         parent == other
     }
 
     /// Change the location of `self` to the specified ``Room`` or ``Object``.
     ///
     /// - Parameter to: The object to which `self` is moved.
-    func move(to other: Object) {
+    func move(to other: Object.ID) {
         parent = other
     }
 }

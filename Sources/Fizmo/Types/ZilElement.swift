@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Identity
 
 /// The set of Zil elements that can be contained in a Zil ``Table``.
 public enum ZilElement: Codable, Equatable {
@@ -32,7 +33,10 @@ public enum ZilElement: Codable, Equatable {
     case none
 
     /// An object element.
-    case object(Object)
+    case object(Object.ID)
+
+    /// A room element.
+    case room(Room.ID)
 
     /// A string element.
     case string(String)
@@ -42,11 +46,22 @@ public enum ZilElement: Codable, Equatable {
 }
 
 extension ZilElement {
-    /// Creates an object element representing a room.
-    public static func room(_ room: Room) -> ZilElement {
-        .object(room)
+    public static func table(
+        _ elements: ZilElement...,
+        flags: Table.Flag...
+    ) -> ZilElement {
+        .table(.init(
+            elements: elements,
+            flags: flags
+        ))
     }
 }
+//extension ZilElement {
+//    /// Creates an object element representing a room.
+//    public static func room(_ room: Room.ID) -> ZilElement {
+//        .object(room)
+//    }
+//}
 
 // MARK: - Conformances
 
