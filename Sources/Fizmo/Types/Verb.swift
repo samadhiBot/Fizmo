@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct Verb {
+public struct Verb: Codable {
 
 }

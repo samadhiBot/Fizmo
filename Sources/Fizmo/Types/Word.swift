@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct Word {
+public struct Word: Codable {
 
 }

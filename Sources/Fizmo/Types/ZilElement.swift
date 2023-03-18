@@ -38,6 +38,8 @@ public enum ZilElement: Codable, Equatable {
     /// A room element.
     case room(Room.ID)
 
+    case routine(Routine.ID)
+
     /// A string element.
     case string(String)
 
