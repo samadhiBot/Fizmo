@@ -12,29 +12,29 @@ import Fizmo
 final class TableTests: FizmoTests {
     func testTable() throws {
         var rooms = Table(
-            forest1,
-            forest2,
-            forest3
+            .room("forest1"),
+            .room("forest2"),
+            .room("forest3")
         )
 
         XCTAssertNoDifference(
             try rooms.get(at: 0),
-            .room(forest1)
+            .room("forest1")
         )
 
         XCTAssertNoDifference(
             try rooms.get(at: 1),
-            .room(forest2)
+            .room("forest2")
         )
 
         XCTAssertNoDifference(
-            try rooms.put(element: .room(clearing), at: 0),
-            .room(clearing)
+            try rooms.put(element: .room("clearing"), at: 0),
+            .room("clearing")
         )
 
         XCTAssertNoDifference(
             try rooms.get(at: 0),
-            .room(clearing)
+            .room("clearing")
         )
 
         XCTAssertThrowsError(
@@ -43,13 +43,13 @@ final class TableTests: FizmoTests {
         )
 
         XCTAssertThrowsError(
-            try rooms.put(element: .room(path), at: 4),
+            try rooms.put(element: .room("path"), at: 4),
             "Out of range: elements count is 3, so max write index is 3."
         )
 
         XCTAssertNoDifference(
-            try rooms.put(element: .room(path), at: 3),
-            .room(path)
+            try rooms.put(element: .room("path"), at: 3),
+            .room("path")
         )
 
         XCTAssertEqual(rooms.count, 4)
@@ -57,12 +57,12 @@ final class TableTests: FizmoTests {
 
     func testTableWithLengthFlag() throws {
         var rooms = Table(
-            .room(forest1),
-            .room(forest2),
-            .room(forest3),
-            .room(path),
-            .room(clearing),
-            .room(forest1),
+            .room("forest1"),
+            .room("forest2"),
+            .room("forest3"),
+            .room("path"),
+            .room("clearing"),
+            .room("forest1"),
             flags: .length
         )
 
@@ -73,11 +73,11 @@ final class TableTests: FizmoTests {
 
         XCTAssertNoDifference(
             try rooms.get(at: 1),
-            .room(forest1)
+            .room("forest1")
         )
 
         XCTAssertThrowsError(
-            try rooms.put(element: .room(path), at: 0),
+            try rooms.put(element: .room("path"), at: 0),
             "Index 0 is the length flag; cannot write to that index."
         )
 
@@ -87,13 +87,13 @@ final class TableTests: FizmoTests {
         )
 
         XCTAssertThrowsError(
-            try rooms.put(element: .room(path), at: 8),
+            try rooms.put(element: .room("path"), at: 8),
             "Out of range: elements count is 6, so max write index is 7."
         )
 
         XCTAssertNoDifference(
-            try rooms.put(element: .room(path), at: 7),
-            .room(path)
+            try rooms.put(element: .room("path"), at: 7),
+            .room("path")
         )
 
         XCTAssertNoDifference(
@@ -106,27 +106,27 @@ final class TableTests: FizmoTests {
 
     func testImmutableTable() throws {
         var rooms = Table(
-            .room(forest1),
-            .room(forest2),
-            .room(forest3),
-            .room(path),
-            .room(clearing),
-            .room(forest1),
+            .room("forest1"),
+            .room("forest2"),
+            .room("forest3"),
+            .room("path"),
+            .room("clearing"),
+            .room("forest1"),
             flags: .pure
         )
 
         XCTAssertNoDifference(
             try rooms.get(at: 0),
-            .room(forest1)
+            .room("forest1")
         )
 
         XCTAssertNoDifference(
             try rooms.get(at: 1),
-            .room(forest2)
+            .room("forest2")
         )
 
         XCTAssertThrowsError(
-            try rooms.put(element: .room(clearing), at: 1),
+            try rooms.put(element: .room("clearing"), at: 1),
             "Table is not mutable."
         )
 
@@ -135,9 +135,9 @@ final class TableTests: FizmoTests {
 
     func testImmutableTableWithLengthFlag() throws {
         var rooms = Table(
-            .room(forest1),
-            .room(forest2),
-            .room(forest3),
+            .room("forest1"),
+            .room("forest2"),
+            .room("forest3"),
             flags: .pure, .length
         )
 
@@ -148,11 +148,11 @@ final class TableTests: FizmoTests {
 
         XCTAssertNoDifference(
             try rooms.get(at: 1),
-            .room(forest1)
+            .room("forest1")
         )
 
         XCTAssertThrowsError(
-            try rooms.put(element: .room(clearing), at: 1),
+            try rooms.put(element: .room("clearing"), at: 1),
             "Table is not mutable."
         )
 
@@ -262,6 +262,29 @@ final class TableTests: FizmoTests {
 // MARK: - Special initializer tests
 
 extension TableTests {
+    func testBooleanInitializer() {
+        XCTAssertNoDifference(
+            Table(true, false, true),
+            Table(
+                .bool(true),
+                .bool(false),
+                .bool(true)
+            )
+        )
+    }
+
+    func testBooleanInitializerWithFlags() {
+        XCTAssertNoDifference(
+            Table(true, false, true, flags: .pure, .length),
+            Table(
+                .bool(true),
+                .bool(false),
+                .bool(true),
+                flags: .pure, .length
+            )
+        )
+    }
+
     func testIntegersInitializer() {
         XCTAssertNoDifference(
             Table(1, 2, 3),
@@ -285,47 +308,24 @@ extension TableTests {
         )
     }
 
-    func testObjectsInitializer() {
+    func testStringInitializer() {
         XCTAssertNoDifference(
-            Table(knife, sandwich, troll),
+            Table("one", "two", "three"),
             Table(
-                .object(knife),
-                .object(sandwich),
-                .object(troll)
+                .string("one"),
+                .string("two"),
+                .string("three")
             )
         )
     }
 
-    func testObjectsInitializerWithFlags() {
+    func testStringInitializerWithFlags() {
         XCTAssertNoDifference(
-            Table(knife, sandwich, troll, flags: .pure, .length),
+            Table("one", "two", "three", flags: .pure, .length),
             Table(
-                .object(knife),
-                .object(sandwich),
-                .object(troll),
-                flags: .pure, .length
-            )
-        )
-    }
-
-    func testRoomsInitializer() {
-        XCTAssertNoDifference(
-            Table(forest1, forest2, forest3),
-            Table(
-                .room(forest1),
-                .room(forest2),
-                .room(forest3)
-            )
-        )
-    }
-
-    func testRoomsInitializerWithFlags() {
-        XCTAssertNoDifference(
-            Table(forest1, forest2, forest3, flags: .pure, .length),
-            Table(
-                .room(forest1),
-                .room(forest2),
-                .room(forest3),
+                .string("one"),
+                .string("two"),
+                .string("three"),
                 flags: .pure, .length
             )
         )

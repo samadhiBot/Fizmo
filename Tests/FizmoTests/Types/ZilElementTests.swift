@@ -10,10 +10,23 @@ import XCTest
 import Fizmo
 
 final class ZilElementTests: FizmoTests {
-    func testRoomObjectEquatable() {
-        XCTAssertNoDifference(
-            ZilElement.object(Object(id: "tree")),
-            ZilElement.room(Object(id: "tree"))
-        )
+    func testExpressibleByBooleanLiteral() {
+        let isFalse: ZilElement = false
+        let isTrue: ZilElement = true
+
+        XCTAssertNoDifference(isFalse, .bool(false))
+        XCTAssertNoDifference(isTrue, .bool(true))
+    }
+
+    func testExpressibleByIntegerLiteral() {
+        let fortyTwo: ZilElement = 42
+
+        XCTAssertNoDifference(fortyTwo, .int(42))
+    }
+
+    func ExpressibleByStringLiteral() {
+        let fortyTwo: ZilElement = "Forty-two"
+
+        XCTAssertNoDifference(fortyTwo, .string("Forty-two"))
     }
 }

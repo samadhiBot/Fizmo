@@ -32,9 +32,9 @@ class Rooms: Codable {
             .isSacred,
         ],
         globals: [
-            Object.mailbox,
+            "Object.mailbox",
         ],
-        location: Object.rooms
+        location: "Object.rooms"
     )
 }
 

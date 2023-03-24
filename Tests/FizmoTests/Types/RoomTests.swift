@@ -21,14 +21,14 @@ final class RoomTests: FizmoTests {
         let westOfHouse = Room(
             id: "westOfHouse",
             directions: [.north: .to("northOfHouse")],
-            location: rooms
+            location: "rooms"
         )
 
         /// The `northOfHouse` (NORTH-OF-HOUSE) room.
         let northOfHouse = Room(
             id: "northOfHouse",
             directions: [.southWest: .to("westOfHouse")],
-            location: rooms
+            location: "rooms"
         )
 
         XCTAssertNotNil(rooms)

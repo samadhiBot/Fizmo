@@ -26,7 +26,7 @@ extension Table {
     ///   - flags: Any modifiers to specify the table's composition and behavior.
     public init(
         _ elements: ZilElement...,
-        flags: Flag...
+        flags: Table.Flag...
     ) {
         self.elements = elements
         self.flags = flags
@@ -59,51 +59,51 @@ extension Table {
     }
 }
 
-extension Table {
-    /// Creates a new `Table` with the specified integer elements and flags.
-    ///
-    /// - Parameters:
-    ///   - ints: The integer elements contained in the table.
-    ///   - flags: Any modifiers to specify the table's composition and behavior.
-    public init(
-        _ ints: Int...,
-        flags: Flag...
-    ) {
-        self.elements = ints.map(ZilElement.int)
-        self.flags = flags
-    }
-
-    /// Creates a new `Table` with the specified object elements and flags.
-    ///
-    /// - Parameters:
-    ///   - objects: The object elements contained in the table.
-    ///   - flags: Any modifiers to specify the table's composition and behavior.
-    public init(
-        _ objects: Object...,
-        flags: Flag...
-    ) {
-        self.elements = objects.map { object in
-//            if let room = object as? Room {
-//                return .room(room.id)
-//            }
-            return .object(object.id)
-        }
-        self.flags = flags
-    }
-
-    /// Creates a new `Table` with the specified string elements and flags.
-    ///
-    /// - Parameters:œ
-    ///   - strings: The string elements contained in the table.
-    ///   - flags: Any modifiers to specify the table's composition and behavior.
-    public init(
-        _ strings: String...,
-        flags: Flag...
-    ) {
-        self.elements = strings.map(ZilElement.string)
-        self.flags = flags
-    }
-}
+//extension Table {
+//    /// Creates a new `Table` with the specified integer elements and flags.
+//    ///
+//    /// - Parameters:
+//    ///   - ints: The integer elements contained in the table.
+//    ///   - flags: Any modifiers to specify the table's composition and behavior.
+//    public init(
+//        _ ints: Int...,
+//        flags: Flag...
+//    ) {
+//        self.elements = ints.map(ZilElement.int)
+//        self.flags = flags
+//    }
+//
+//    /// Creates a new `Table` with the specified object elements and flags.
+//    ///
+//    /// - Parameters:
+//    ///   - objects: The object elements contained in the table.
+//    ///   - flags: Any modifiers to specify the table's composition and behavior.
+//    public init(
+//        _ objects: Object...,
+//        flags: Flag...
+//    ) {
+//        self.elements = objects.map { object in
+////            if let room = object as? Room {
+////                return .room(room.id)
+////            }
+//            return .object(object.id)
+//        }
+//        self.flags = flags
+//    }
+//
+//    /// Creates a new `Table` with the specified string elements and flags.
+//    ///
+//    /// - Parameters:œ
+//    ///   - strings: The string elements contained in the table.
+//    ///   - flags: Any modifiers to specify the table's composition and behavior.
+//    public init(
+//        _ strings: String...,
+//        flags: Flag...
+//    ) {
+//        self.elements = strings.map(ZilElement.string)
+//        self.flags = flags
+//    }
+//}
 
 extension Table {
     /// The number of elements in the table.

@@ -58,12 +58,6 @@ extension ZilElement {
         ))
     }
 }
-//extension ZilElement {
-//    /// Creates an object element representing a room.
-//    public static func room(_ room: Room.ID) -> ZilElement {
-//        .object(room)
-//    }
-//}
 
 // MARK: - Conformances
 
