@@ -330,6 +330,29 @@ extension TableTests {
             )
         )
     }
+
+    func testHeterogeneous() {
+        let otherTable = Table()
+
+        XCTAssertNoDifference(
+            Table(
+                1,
+                "two",
+                true,
+                .object("knife"),
+                .table(otherTable),
+                flags: .pure, .length
+            ),
+            Table(
+                .int(1),
+                .string("two"),
+                .bool(true),
+                .object("knife"),
+                .table(otherTable),
+                flags: .pure, .length
+            )
+        )
+    }
 }
 
 /* More table test subjects:
