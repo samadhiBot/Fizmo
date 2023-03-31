@@ -16,6 +16,7 @@ public protocol ZilArithmetic {
     /// Returns `true` if the value of `self` is zero, else returns `false`.
     var isZero: Bool { get }
 
+    /*
     /// Adds two or more values and returns the result.
     ///
     /// - Parameter values: One or more values to add.
@@ -43,6 +44,7 @@ public protocol ZilArithmetic {
     ///
     /// - Returns: The resulting value.
     static func subtract(_ values: Self...) -> Self
+     */
 
     /// Adds one or more values to `self` and returns the result.
     ///
@@ -51,14 +53,14 @@ public protocol ZilArithmetic {
     /// - Parameter others: One or more values to add to `self`.
     ///
     /// - Returns: The resulting value.
-    mutating func add(_ others: Self...) -> Self
+    func add(_ others: Self...) -> Self
 
     /// Subtracts `1` from `self` and returns the result.
     ///
     /// `decrement` mutates `self` during the operation.
     ///
     /// - Returns: The resulting value.
-    mutating func decrement() -> Self
+    func decrement() -> Self
 
     /// Divides `self` by one or more values and returns the result.
     ///
@@ -67,7 +69,7 @@ public protocol ZilArithmetic {
     /// - Parameter others: One or more values to divide `self` by.
     ///
     /// - Returns: The resulting value.
-    mutating func divide(_ others: Self...) -> Self
+    func divide(_ others: Self...) -> Self
 
     /// Multiplies `self` by one or more values and returns the result.
     ///
@@ -76,7 +78,7 @@ public protocol ZilArithmetic {
     /// - Parameter others: One or more values to multiply `self` by.
     ///
     /// - Returns: The resulting value.
-    mutating func multiply(_ others: Self...) -> Self
+    func multiply(_ others: Self...) -> Self
 
     /// Subtracts one or more values from `self` and returns the result.
     ///
@@ -85,10 +87,12 @@ public protocol ZilArithmetic {
     /// - Parameter others: One or more values to subtract from `self`.
     ///
     /// - Returns: The resulting value.
-    mutating func subtract(_ others: Self...) -> Self
+    func subtract(_ others: Self...) -> Self
 }
 
 // MARK: - Default implementations
+
+/*
 
 extension ZilArithmetic where Self == Int {
     public var isOne: Bool {
@@ -128,37 +132,66 @@ extension ZilArithmetic where Self == Int {
             return values[1...].reduce(values[0], -)
         }
     }
+     */
 
-    public mutating func add(_ others: Self...) -> Self {
-        self = others.reduce(self, +)
-        return self
-    }
-
-    public mutating func decrement() -> Self {
-        self -= 1
-        return self
-    }
-
-    public mutating func divide(_ others: Self...) -> Self {
-        self = others.reduce(self, /)
-        return self
-    }
-
-    public mutating func multiply(_ others: Self...) -> Self {
-        self = others.reduce(self, *)
-        return self
-    }
-
-    public mutating func subtract(_ others: Self...) -> Self {
-        guard !others.isEmpty else {
-            self = -self
-            return self
-        }
-        self = others.reduce(self, -)
-        return self
-    }
-}
+//    public mutating func add(_ others: Self...) -> Self {
+//        self = others.reduce(self, +)
+//        return self
+//    }
+//
+//    public mutating func decrement() -> Self {
+//        self -= 1
+//        return self
+//    }
+//
+//    public mutating func divide(_ others: Self...) -> Self {
+//        self = others.reduce(self, /)
+//        return self
+//    }
+//
+//    public mutating func multiply(_ others: Self...) -> Self {
+//        self = others.reduce(self, *)
+//        return self
+//    }
+//
+//    public mutating func subtract(_ others: Self...) -> Self {
+//        guard !others.isEmpty else {
+//            self = -self
+//            return self
+//        }
+//        self = others.reduce(self, -)
+//        return self
+//    }
+//}
 
 // MARK: - Conformances
 
-extension Int: ZilArithmetic {}
+extension Int: ZilArithmetic {
+    public var isOne: Bool {
+        self == 1
+    }
+
+    public var isZero: Bool {
+        self == 0
+    }
+
+    public func add(_ others: Int...) -> Int {
+        others.reduce(self, +)
+    }
+
+    public func decrement() -> Int {
+        self - 1
+    }
+
+    public func divide(_ others: Int...) -> Int {
+        others.reduce(self, /)
+    }
+
+    public func multiply(_ others: Int...) -> Int {
+        others.reduce(self, *)
+    }
+
+    public func subtract(_ others: Int...) -> Int {
+        others.reduce(self, -)
+    }
+}

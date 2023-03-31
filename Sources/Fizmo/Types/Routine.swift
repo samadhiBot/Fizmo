@@ -14,9 +14,9 @@ public struct Routine: Equatable, Identifiable {
 
 public extension Routine {
     enum Function {
-        case intBool((Int) -> Bool)
-        case intVoid((Int) -> Void)
-        case voidBool(() -> Bool)
-        case voidVoid(() -> Void)
+        case intToBool((Int) -> Bool)
+        case intToVoid((Int) -> Void)
+        case voidToBool(() -> Bool)
+        case voidToVoid(() -> Void)
     }
 }
