@@ -147,8 +147,8 @@ public final class Object: Codable, Identifiable {
     /// Change the location of `self` to the specified ``Room`` or ``Object``.
     ///
     /// - Parameter to: The object to which `self` is moved.
-    public func move(to other: Object.ID) {
-        parent = other
+    public func move(to other: Object) {
+        parent = other.id
     }
 }
 

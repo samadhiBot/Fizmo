@@ -29,6 +29,8 @@ extension ZilAssignment {
 
 // MARK: - Conformances
 
+extension Bool: ZilAssignment {}
+
 extension Int: ZilAssignment {}
 
 extension String: ZilAssignment {}
