@@ -140,14 +140,14 @@ public final class Object: Codable, Identifiable {
     /// - Parameter other: The room or object in which to look for `self`.
     ///
     /// - Returns: Whether `self` is in the specified object.
-    func isIn(_ other: Object.ID) -> Bool {
+    public func isIn(_ other: Object.ID) -> Bool {
         parent == other
     }
 
     /// Change the location of `self` to the specified ``Room`` or ``Object``.
     ///
     /// - Parameter to: The object to which `self` is moved.
-    func move(to other: Object.ID) {
+    public func move(to other: Object.ID) {
         parent = other
     }
 }

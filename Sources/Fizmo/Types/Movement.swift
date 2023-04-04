@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Identity
 
 /// The set of ways to define movement in some direction.
 public enum Movement: Codable, Equatable {
